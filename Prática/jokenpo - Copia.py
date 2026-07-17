@@ -12,7 +12,11 @@ while True:
     escolha_jogador = input("Digite: pedra, papel ou tesoura para jogar, 0 para acabar ou 1 para limpar o histórico de jogadas: ")
     escolha_maquina = random.choice(escolhas)
 
-  
+    while escolha_jogador not in escolhas:
+        print("Erro")
+        escolha_jogador = input("Digite: pedra, papel ou tesoura para jogar, 0 para acabar ou 1 para limpar o histórico de jogadas: ")
+        
+
     if escolha_jogador == "1":
         limpar()
 

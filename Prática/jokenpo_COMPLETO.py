@@ -13,7 +13,7 @@ while True:
     escolha_maquina = random.choice(escolhas)
 
     while escolha_jogador not in escolhas:
-        print("Erro")
+        print("ERRO! -N40_S31_0_QU3_3_1SS0-")
         escolha_jogador = input("Digite: pedra, papel ou tesoura para jogar, 0 para acabar ou 1 para limpar o histórico de jogadas: ")
         
 

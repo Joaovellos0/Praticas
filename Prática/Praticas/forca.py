@@ -21,3 +21,8 @@ while contador_de_erros < 10:
 
     chances = print(f"Chances: {contador_de_erros}")
     letra = input("Digite uma letra: ")
+
+    if letra not in palavra:
+        contador_de_erros += 1
+
+    else:

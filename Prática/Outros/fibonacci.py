@@ -18,4 +18,5 @@ while contador <= termos:
     c = a + b
     a, b = b, c
     contador += 1
+
     print(f" → {c}", end="")

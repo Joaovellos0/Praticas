@@ -26,3 +26,5 @@ while contador_de_erros < 10:
         contador_de_erros += 1
 
     else:
+        # 1- Achar a posição da letra dentro da palavra. A palavra é uma lista, a letra é um valor. Utilize o método para encontrar o indice de um item em uma lista pelo valor.
+        # 2- Utilize um método de lista para substituir o valor em uma posição específica. Substitua pela letra.

@@ -11,16 +11,20 @@ lista_de_palavras = [
     "placa de video", "chipset"
 ]   
 
-while True:
+palavras_escolhidas = []
+
+while lista_de_palavras:
 
     palavra = random.choice(lista_de_palavras)
+    lista_de_palavras.remove(palavra)
+    palavras_escolhidas.append(palavra)
     palavra = list(palavra)
     palavra_secreta = ["_"] * len(palavra)
 
-    for indice_palavra_maquina, letra_palavra_maquina in enumerate(palavra):
+    for indice_maquina, letra_maquina in enumerate(palavra):
 
-        if letra_palavra_maquina == " " or letra_palavra_maquina == "-":
-           palavra_secreta[indice_palavra_maquina] = letra_palavra_maquina
+        if letra_maquina == " " or letra_maquina == "-":
+           palavra_secreta[indice_maquina] = letra_maquina
 
     print("\n          (JOGO DA FORCA SEM FORCA)\n")
     print("Descubra qual é a palavra:", "".join(palavra_secreta))
@@ -35,19 +39,38 @@ while True:
          
          contador = 6
 
-         while contador >= 0:
+         while contador > 0:
             
-            print(f"Chances: {contador}")
-            letra = input("Digite uma letra:\n")
+            print(f"\nChances: {contador}\n")
+            letra = input("Digite uma letra ou (2) para chutar:\n")
             limpar()
 
-            if letra not in palavra:
+            if letra == "2":
 
-               contador -= 1
+               print("".join(palavra_secreta))              
+               chute = input("\nChute:\n")
+               chute = list(chute)
 
-            elif contador == 0:
-                 print(f"Você não conseguiu. Tente outra vez.")
-                 break
+               if chute == palavra:
+
+                  print("\nParabens, você acertou!")
+                  break
+
+               elif chute != palavra:
+
+                    lista_de_palavras.append(palavra)
+                    print("Não foi dessa vez.")
+                    break
+            
+            elif letra not in palavra:
+
+                 contador -= 1
+
+                 if contador == 0:
+
+                    print(f"Você não conseguiu. Tente outra vez.")
+                    lista_de_palavras.append(palavra)
+                    break
             
             else:
 
@@ -68,6 +91,8 @@ while True:
         
     else:
 
+        lista_de_palavras.append(palavra)
         limpar()
         print("Esta opção não existe.")
                 
+print("Não há mais palavras para descobrir. Obrigado por jogar :)")

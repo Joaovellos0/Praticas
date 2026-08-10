@@ -1,3 +1,7 @@
-  # elif contador == 0:
+palavra = random.choice(lista_de_palavras)
+lista_de_palavras.remove(palavra)
+palavras_escolhidas.append(palavra)
+palavra = list(palavra)
+palavra_secreta = ["_"] * len(palavra)
 
-            #      print(f"Você não conseguiu descobrir a palavra. Tente novamente:\n{opcao}")
+print(palavras_escolhidas)

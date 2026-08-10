@@ -38,5 +38,3 @@ while contador_de_erros < 10:
 
        print("Você conseguiu descobrir a palavra.", "".join(palavra_secreta))
        break
-
-

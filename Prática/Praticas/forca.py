@@ -4,7 +4,7 @@ import os
 def limpar():
     os.system("cls")
 
-lista_de_palavras = [ 'gabinete', 'cpu', 'gpu' ]
+lista_de_palavras = ['placa-mae', 'gabinete', 'memoria-ram', 'cpu', 'gpu' ]
 
 palavra = random.choice(lista_de_palavras)
 
@@ -19,22 +19,12 @@ contador_de_erros = 0
 
 while contador_de_erros < 10:
 
-    print(f"Chances: {contador_de_erros}")
+    chances = print(f"Chances: {contador_de_erros}")
     letra = input("Digite uma letra: ")
 
     if letra not in palavra:
         contador_de_erros += 1
 
     else:
-
-        for indice, caractere in enumerate(palavra):
-
-            if caractere == letra:
-               palavra_secreta[indice] = letra
-            
-        print(f"Progresso: {palavra_secreta}")
-
-    if palavra == palavra_secreta:
-
-       print("Você conseguiu descobrir a palavra.", "".join(palavra_secreta))
-       break
+        # 1- Achar a posição da letra dentro da palavra. A palavra é uma lista, a letra é um valor. Utilize o método para encontrar o indice de um item em uma lista pelo valor.
+        # 2- Utilize um método de lista para substituir o valor em uma posição específica. Substitua pela letra.

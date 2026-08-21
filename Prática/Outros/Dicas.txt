@@ -1,0 +1,17 @@
+Função len: serve para retornar o número de caracteres de uma string ou a quantidade de elementos dentro de coleções
+            listas, tuplas ou dicionarios.
+
+            ex.: "texto" len("texto") = 5 
+                  lista_de_palavras = [
+                    "gabinete",
+                    "memoria ram",
+                    "fonte",
+                    "armazenamento",
+                    "ventoinha",
+                    "processador",
+                    "placa-mae",
+                    "placa de video",
+                    "chipset",
+                  ]                     len(lista_de_palavras) = 9
+                  obs.: Você pode usar o número de caracteres como por exemplo, multiplicador
+                        ex.: "texto" len("texto") = 5 | 2 * len("texto) = 10

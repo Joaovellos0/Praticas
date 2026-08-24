@@ -99,3 +99,15 @@ nav {
     color: black;
     font-weight: bold;
 }
+
+body {
+    background-color: rgb(16, 26, 38);
+}
+
+main {
+    margin-left: 180px;
+    margin-right: 180px;
+    background-color: aqua;
+    height: 100vh;
+}
+

@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: 0;
+    color: rgb(228, 228, 228);
+}
+
+.background_head1 {
+    background-color: rgb(224, 177, 20);
+}
+
+.background_head2 {
+    background-color: rgb(16, 26, 38);
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(224, 177, 20);
+    margin-left: 180px;
+    margin-right: 180px;
+    height: 50px;
+    
+}
+
+.link_logo {
+    height: 25px;
+    margin-top: 11px;
+    border-radius: 50%;
+}
+
+.link_logo:hover {
+    transform: scale(1.10);
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(16, 26, 38);
+    margin-left: 180px;
+    margin-right: 180px;
+    height: 100px;
+
+}
+
+.navegacao:hover {
+    
+    background-color: rgb(224, 177, 20);
+    margin-bottom: 17px;
+    height: 1.3px;
+    
+}
+
+.titulo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+h2 {
+    color: rgb(228, 228, 228);
+    font-weight: bolder;
+}
+
+.complemento_titulo {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(228, 228, 228);
+    border-radius: 8px;
+}
+
+h4 {
+ color: rgb(16, 26, 38);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    
+    
+}
+
+.anuncie {
+    padding: 14px;
+    background-color: rgb(224, 177, 20);
+    border-radius: 50px ;
+}
+
+.anuncie:hover {
+    transform: scale(1.10);
+}
+
+.seu_anuncio {
+    color: black;
+    font-weight: bold;
+}
+
+body {
+    background-color: rgb(16, 26, 38);
+}
+
+main {
+    margin-left: 180px;
+    margin-right: 180px;
+    background-color: aqua;
+    height: 100vh;
+}
+

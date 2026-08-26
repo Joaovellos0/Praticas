@@ -223,7 +223,7 @@ main {
     height: 80px;
     width: 90px;
     border-radius: 15px;
-    border-bottom: 2.5px solid rgb(240, 187, 10);
+    border-bottom: 3px solid rgb(240, 187, 10);
 }
 
 footer {

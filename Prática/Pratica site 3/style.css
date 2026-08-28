@@ -13,6 +13,14 @@ main {
     flex: 1;
 }
 
+nav {
+    height: 100vh;
+    width: 7.6vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 a {
     text-decoration: 0;
     color: white;
@@ -22,7 +30,7 @@ button {
     cursor: pointer;
 }
 
-.sidebar {
+.sidebar.aberta {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -32,20 +40,33 @@ button {
     left: 0;
     top: 0;
     height: 96.4%;
-    width: 120px;
-    transform: translateX(-100%);
+    max-width: 100%;
     background: linear-gradient(-140deg, rgb(30, 30, 30), rgb(163, 163, 163));
     border-right: 3px solid rgb(20, 19, 19);
     border-top: 3px solid rgb(20, 19, 19);
     border-bottom: 3px solid rgb(20, 19, 19);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    transform: translateX(0);
+}
+
+.sidebar.fechada {
+    transform: translateX(-120%);
 }
 
 .sidebarConteiner {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.sidebarToggleOn {
+    margin-left: 2px;
+    border: 0;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(180deg, rgb(18, 233, 90), rgb(12, 146, 57));
 }
 
 .sidebarToggleOff {
@@ -58,7 +79,6 @@ button {
     width: 6vw;
 }
 
-.sidebar.aberta {
-    transform: translateX(0);
-}
+
+
 

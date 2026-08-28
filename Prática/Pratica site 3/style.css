@@ -50,8 +50,9 @@ button {
     transform: translateX(0);
 }
 
-.sidebar.fechada {
+.sidebar {
     transform: translateX(-120%);
+    transition: transform 0.3s ease-in-out;
 }
 
 .sidebarConteiner {

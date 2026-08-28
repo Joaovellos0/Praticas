@@ -20,8 +20,8 @@ a {
     display: flex;
     justify-content: space-between;
     background-color: rgb(240, 187, 10);
-    margin-left: 180px;
-    margin-right: 180px;
+   margin-left: 228px;
+    margin-right: 228px;
     height: 50px;
     
 }
@@ -40,8 +40,8 @@ a {
     display: flex;
     justify-content: space-between;
     background-color: rgb(16, 26, 38);
-    margin-left: 180px;
-    margin-right: 180px;
+   margin-left: 228px;
+    margin-right: 228px;
     margin-bottom: 50px;
     height: 100px;
 
@@ -118,8 +118,8 @@ body {
 }
 
 main {
-    margin-left: 180px;
-    margin-right: 180px;
+    margin-left: 228px;
+    margin-right: 228px;
     background-color: rgb(16, 26, 38);
     flex: 1;
     padding-bottom: 47px;
@@ -237,9 +237,9 @@ footer {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 30.3vw;
-    margin-left: 180px;
-    margin-right: 180px;
+    gap: 27.3vw;
+    margin-left: 228px;
+    margin-right: 228px;
 }
 
 .foot_text {

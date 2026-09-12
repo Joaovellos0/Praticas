@@ -29,13 +29,14 @@ class Heroi:
 
     def character_sheet(self):
         print(
-            f"Nome: {self.nome}\nGenero: {self.genero}\nClasse: {self.classe}\nNível: {self.nivel}\nVida: {self.vida}"
+            f"Nome: {self.nome}\nGenero: {self.genero}\nClasse: {self.classe}\nNível: {self.nivel}\nVida: {self.vida}\n"
         )
 
     def causar_dano(self, monstro):
         monstro.vida -= self.dano
         monstro.vida_restante = monstro.vida
-        print(f"{self.nome} atacou {monstro}")
+        print(f"{self.nome} atacou {monstro.tipo}\nVida restante do inimigo: {monstro.vida}")
+        
 
 
 class Monstro:
@@ -46,8 +47,10 @@ class Monstro:
         self.vida = 100 + (nivel * nivel)
         self.dano = self.strength + nivel
 
-    def monster_sheet(self):
-        print(f"{self.tipo}\n{self.nivel}\n{self.strength}\n{self.vida}, {self.dano}")
+    def causar_dano(self, jogador):
+        jogador.vida -= self.dano
+        print(f"{self.tipo} atacou {jogador.nome}")
+
 
 
 lista_de_mobs = []
@@ -119,8 +122,28 @@ personagem.character_sheet()
 comecar = input("Deseja iniciar uma batalha? (s) ou (n)").lower()
 
 if comecar == "s":
-    print("Batalha iniciada.")
+    print("Batalha iniciada.\n")
 
-    sortear_oponente = random.choice(lista_de_mobs)
-    oponente = sortear_oponente
-    personagem.causar_dano(oponente)
+    oponente = random.choice(lista_de_mobs)
+    print(f"O oponentede de {personagem.nome} é {oponente.tipo}\n")
+
+    while True:
+
+        time.sleep(1.2)
+        print(f"Vida de {personagem.nome}: {personagem.vida}         Vida de {oponente.tipo}: {oponente.vida}")
+        if personagem.vida <= 0:
+            break
+        elif oponente.vida <= 0:
+            break
+        else:
+
+            roleta = ["Sim", "Não"]
+            quem_comeca = random.choice(roleta)
+
+            if quem_comeca == "Sim":
+                personagem.causar_dano(oponente)
+            elif quem_comeca == "Não":
+                    oponente.causar_dano(personagem)
+
+            
+

@@ -9,22 +9,34 @@ def limpar():
 
 class Entidade:
     def __init__(self, vida: int, nivel: int, forca: int):
-        self.vida = vida
+        self.vida = vida * nivel
         self.nivel = nivel
-        self.forca = forca
+        self.forca = (forca + nivel) // 2
         self.dano = self.nivel * self.forca
+        self.tipo_nome = "Entidade"
 
-    def atacar(self, alvo):
-        alvo.vida -= self.dano
+    def causar_dano(self, alvo):
+        print(f"{self.tipo_nome} atacou {alvo.tipo_nome}")
+        time.sleep(1)
+        alvo.levar_dano(self)
+
+    def levar_dano(self, alvo):
+        dano = alvo.dano
+        self.vida -= alvo.dano
+        if self.vida <= 0:
+            self.vida = 0
+        print(f"{self.tipo_nome} recebeu {dano} de dano de {alvo.tipo_nome}\n")
+        time.sleep(1)
 
 
 class Heroi(Entidade):
     def __init__(self, vida, forca, classe: str, genero: str, nome: str):
-        super().__init__(vida=100 + vida, nivel=1, forca=forca)
+        super().__init__(vida, nivel=50, forca=forca)
         self.experiencia = 0
         self.classe = classe
         self.genero = genero
         self.nome = nome
+        self.tipo_nome = self.nome
 
     def character_sheet(self):
         if self.genero == "Masculino":
@@ -42,6 +54,12 @@ class Inimigo(Entidade):
         super().__init__(vida=vida, nivel=nivel, forca=forca)
         self.tipo = tipo
         self.xp = self.forca + self.nivel
+        self.tipo_nome = self.tipo
+
+    def enemy_sheet(self):
+        print(
+            f"Tipo: {self.tipo}\nNível: {self.nivel}\nVida: {self.vida}\nForça: {self.forca}"
+        )
 
 
 class Chefe(Inimigo):
@@ -53,13 +71,13 @@ class Chefe(Inimigo):
 def gerar_inimigo():
 
     tipos_inimigos = [
-        {"Goblin": {"Vida": 10, "Força": 2}},
-        {"Hobgoblin": {"Vida": 10, "Força": 5}},
-        {"Grimgoblin": {"Vida": 10, "Força": 8}},
-        {"Greater Goblin": {"Vida": 10, "Força": 10}},
-        {"Cyclops": {"Vida": 10, "Força": 15}},
-        {"Chimera": {"Vida": 10, "Força": 17}},
-        {"Wyvern": {"Vida": 10, "Força": 20}},
+        {"Goblin": {"Vida": 19, "Força": 9}},
+        {"Hobgoblin": {"Vida": 25, "Força": 15}},
+        {"Grimgoblin": {"Vida": 34, "Força": 21}},
+        {"Greater Goblin": {"Vida": 48, "Força": 30}},
+        {"Cyclops": {"Vida": 83, "Força": 51}},
+        {"Chimera": {"Vida": 120, "Força": 36}},
+        {"Wyvern": {"Vida": 142, "Força": 67}},
     ]
 
     nivel_gerado = random.choice(range(3, 51))
@@ -86,8 +104,6 @@ def gerar_inimigo():
             atributo = tipo[inimigo]
             vida = atributo["Vida"]
             forca = atributo["Força"]
-            vida *= nivel_gerado
-            forca += nivel_gerado
 
             mob = Inimigo(vida, nivel_gerado, forca, inimigo)
 
@@ -106,8 +122,8 @@ while True:
     elif menu_inicial == "":
         limpar()
         classes = [
-            {"Knight": {"Vida": 80, "Força": 25}},
-            {"Warrior": {"Vida": 100, "Força": 32}},
+            {"Knight": {"Vida": 110, "Força": 27}},
+            {"Warrior": {"Vida": 80, "Força": 35}},
         ]
         print("Criador de Personagem")
 
@@ -171,6 +187,7 @@ for i in range(10):
     lista_oponentes.append(mob)
 
 oponentes = lista_oponentes
+vida_inicial = personagem.vida
 
 while True:
 
@@ -181,32 +198,60 @@ while True:
         break
     elif comecar == "s":
 
+        oponente = random.choice(oponentes)
+        vida_inicial_oponente = oponente.vida
+        print(f"O oponente de {personagem.nome} é {oponente.tipo}")
+        oponente.enemy_sheet()
+        time.sleep(3)
+        limpar()
+
         while True:
-            oponente = random.choice(oponentes)
-            oponentes.remove(oponente)
-            print(f"O oponente de {personagem.nome} é {oponente.tipo}")
-            time.sleep(1.5)
+
             print(
-                f"Vida {personagem.nome}: {personagem.vida}         Vida {oponente.tipo}: {oponente.vida}"
+                f"Vida {personagem.nome}: {personagem.vida}         Vida {oponente.tipo}: {oponente.vida}\n"
             )
 
             opcoes = ["H", "E"]
             quem_ataca = random.choice(opcoes)
 
             if quem_ataca == "H":
-                personagem.atacar(oponente)
-                print(f"{personagem.nome} atacou {oponente.tipo}")
+                personagem.causar_dano(oponente)
 
             elif quem_ataca == "E":
-                oponente.atacar(personagem)
-                print(f"{oponente.tipo} atacou {personagem.nome}")
+                oponente.causar_dano(personagem)
 
             if personagem.vida <= 0:
-                print(f"{oponente.tipo} derrotou {personagem.nome}")
+
+                print(
+                    f"Vida {personagem.nome}: {personagem.vida}         Vida {oponente.tipo}: {oponente.vida}\n{oponente.tipo} derrotou {personagem.nome}\n"
+                )
+
+                oponente.vida = vida_inicial_oponente
+                personagem.vida = vida_inicial
                 break
+
             elif oponente.vida <= 0:
-                print(f"{personagem.nome} derrotou {oponente.tipo}")
-                continue
+
+                print(
+                    f"Vida {personagem.nome}: {personagem.vida}         Vida {oponente.tipo}: {oponente.vida}\n{personagem.nome} derrotou {oponente.tipo}\n"
+                )
+
+                personagem.vida = vida_inicial
+                oponentes.remove(oponente)
+                if not oponentes:
+                    print(f"{personagem.nome} derrotou todos os inimigos!")
+                    break
+                else:
+                    oponente = random.choice(oponentes)
+                    vida_inicial_oponente = oponente.vida
+                    input()
+                    limpar()
+
+                    print(f"Próximo oponente: {oponente.tipo}")
+                    oponente.enemy_sheet()
+                    time.sleep(3)
+                    limpar()
+                    continue
 
     else:
         print("Opção inválida.")

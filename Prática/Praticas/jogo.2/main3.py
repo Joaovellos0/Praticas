@@ -30,7 +30,7 @@ class Entidade:
 
 
 class Heroi(Entidade):
-    def __init__(self, vida, forca, classe: str, genero: str, nome: str):
+    def __init__(self, vida: int, forca: int, classe: str, genero: str, nome: str):
         super().__init__(vida, nivel=50, forca=forca)
         self.experiencia = 0
         self.classe = classe
@@ -38,13 +38,13 @@ class Heroi(Entidade):
         self.nome = nome
         self.tipo_nome = self.nome
 
-    def character_sheet(self):
+    def __str__(self):
         if self.genero == "Masculino":
-            print(
+            return(
                 f"     SEU HEROI\n\nNome: {self.nome}\nClasse: {self.classe}\nGênero: {self.genero}\nNível: {self.nivel}\nVida: {self.vida}\nForça: {self.forca}\n\n"
             )
         elif self.genero == "Feminino":
-            print(
+            return(
                 f"     SUA HEROÍNA\n\nNome: {self.nome}\nClasse: {self.classe}\nGênero: {self.genero}\nNível: {self.nivel}\nVida: {self.vida}\nForça: {self.forca}\n\n"
             )
 
@@ -56,8 +56,8 @@ class Inimigo(Entidade):
         self.xp = self.forca + self.nivel
         self.tipo_nome = self.tipo
 
-    def enemy_sheet(self):
-        print(
+    def __str__(self):
+        return(
             f"Tipo: {self.tipo}\nNível: {self.nivel}\nVida: {self.vida}\nForça: {self.forca}"
         )
 
@@ -172,7 +172,7 @@ while True:
             vida, forca, nome_classe, genero, input("Escreva o Nome do personagem: ")
         )
         limpar()
-        personagem.character_sheet()
+        print(personagem)
         break
 
     else:
@@ -182,14 +182,14 @@ while True:
         continue
 
 lista_oponentes = []
-for i in range(10):
+for i in range(3):
     mob = gerar_inimigo()
     lista_oponentes.append(mob)
 
 oponentes = lista_oponentes
 vida_inicial = personagem.vida
 
-while True:
+while len(oponentes) > 0:
 
     comecar = input("Ir para a arena? (s/n)\n").lower()
     limpar()
@@ -201,7 +201,7 @@ while True:
         oponente = random.choice(oponentes)
         vida_inicial_oponente = oponente.vida
         print(f"O oponente de {personagem.nome} é {oponente.tipo}")
-        oponente.enemy_sheet()
+        print(oponente)
         time.sleep(3)
         limpar()
 
@@ -239,7 +239,7 @@ while True:
                 personagem.vida = vida_inicial
                 oponentes.remove(oponente)
                 if not oponentes:
-                    print(f"{personagem.nome} derrotou todos os inimigos!")
+                    print(f"{personagem.nome} derrotou todos os inimigos!\n")
                     break
                 else:
                     oponente = random.choice(oponentes)
@@ -248,7 +248,7 @@ while True:
                     limpar()
 
                     print(f"Próximo oponente: {oponente.tipo}")
-                    oponente.enemy_sheet()
+                    print(oponente)
                     time.sleep(3)
                     limpar()
                     continue
@@ -258,3 +258,4 @@ while True:
         time.sleep(1)
         limpar()
         continue
+

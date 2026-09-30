@@ -1,0 +1,373 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS';
+    box-sizing: border-box;
+}
+
+header {
+    position: sticky;
+    max-width: 100vw;
+    height: 9vh;
+    box-shadow: 1px 4px 8px 0px #222222;
+}
+
+.header_contents {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(239, 242, 245);
+    gap: 0;
+    align-items: center;
+}
+
+.logo_conteiner {
+    display: flex;
+    flex-direction: row;align-items: center;
+    gap: 5px;
+    font-size: 30px;
+    font-weight: lighter;
+}
+
+.logo_img {
+    height: 22px;
+    width: 30px;
+    border-radius: 50px 0 0 0;
+    background-color: rgb(19, 19, 19);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#search {
+    border-radius: 9px;
+    border: solid black 1px;
+    background-color: aliceblue;
+    height: 20px;
+}
+
+.nav_links {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.account_conteiner {
+    margin-left: 20px;
+}
+
+/* Home */
+
+.home {
+    background-color: rgb(69, 69, 69);
+    min-height: 100vh;
+    max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero_box {
+    padding: 15px 15px 0 15px;
+}
+
+.hero {
+    height: 60vh;
+    padding: 50px;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-shadow: -1px 3px 3px #151515;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.hero_conteiner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+    width: 50%;
+    justify-content: center;
+    align-items: baseline;
+    color: rgb(239, 242, 245);
+    position: relative;
+    z-index: 1;
+}
+
+.title {
+    font-size: 35px;
+}
+
+.title_bottom {
+    margin-top: 8px;
+    width: 130px;
+    color: rgb(239, 242, 245);
+}
+
+.description_box {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.benefits_box {
+    padding: 15px;
+    margin: 20px 100px 0 100px;
+}
+
+.benefits_conteiner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.card {
+    color: rgb(239, 242, 245);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(10, 10, 10);
+}
+
+.card_icon_box {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.card_description_box {
+    font-size: 11px;
+}
+
+.more_benefits_box {
+    padding: 80px 15px 15px 15px;
+    margin: 0 100px 0 100px;
+}
+
+.more_benefits_conteiner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 80px;
+}
+
+.card2_promo {
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.card2_promo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.card2_promo_contents{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-shadow: -1px 3px 3px #151515;
+    padding: 50px 30px 50px 30px;
+    gap: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.card2_promo_title_box_special {
+    color: rgb(3, 195, 22);
+}
+
+.card2_promo_title_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.card2_promo_title {
+    font-size: 30px;
+    color: rgb(239, 242, 245);
+}
+
+.title_line_box {
+    width: 130px;
+    margin-bottom: 25px;
+}
+
+.title_line {
+    border: 0;
+    height: 2px;
+    background-color: rgb(3, 195, 22);
+}
+
+.card2_promo_contents_desc_box {
+    color: rgb(239, 242, 245);
+}
+
+.card2_promo_contents_btn {
+    height: 35px;
+    width: 100px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.card2_promo_extra {
+    font-size: 9px;
+    color: rgb(3, 195, 22);
+}
+
+.card2 {
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 50px;
+}
+
+.card2_contents {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 120px;
+}
+
+.card2_bubble_box {
+    display: flex;
+    justify-content: baseline;
+    align-items: flex-end;
+    height: 200px;
+}
+
+.card2_bubble {
+    height: 80px;
+    width: 80px;
+    background-color: rgb(3, 195, 22);
+    color: rgb(10, 10, 10);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card2_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 200px;
+}
+
+.card2_offer {
+    color: rgb(3, 195, 22);
+    text-shadow: 1px 1px 1px #121212;
+}
+
+.card2_TITLE_box {
+    color: rgb(239, 242, 245);
+    text-shadow: -1px 3px 3px #151515;
+}
+
+.novidades_box {
+    padding: 15px;
+    margin: 0 100px 0 100px;
+}
+
+.novidades_conteiner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.novidades_title_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.novidades_txt {
+    color: rgb(3, 195, 22);
+}
+
+.novidades_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    color: rgb(239, 242, 245);
+}
+
+.n_title_line {
+    border: solid rgb(3, 195, 22) 1px;
+    width: 50px;
+}
+
+.novidades_products_box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+}
+
+.novidades_card {
+    display: flex;
+    flex-direction: column;
+}
+
+.novidade_card_img_box {
+    width: 100%;
+}
+
+.novidade_card_img_box img {
+    max-width: 100%;
+}
+
+.novidades_product_details_box {
+    padding: 10px;
+    background-color: rgb(10, 10, 10);
+    color: rgb(239, 242, 245);
+}
+
+.novidades_product_details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.novidades_product_price {
+    color: rgb(3, 195, 22);
+}
+
+.novidades_product_btn {
+     height: 35px;
+    width: 100px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}

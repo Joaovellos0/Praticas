@@ -1,0 +1,1261 @@
+/* ==========================================================================
+   MÙSIC Shop - Estilos da Página de Detalhe de Produtos (Versão Padronizada)
+   Identidade Visual: Luxo Contemporâneo, Meze Audio Aesthetic
+   ========================================================================== */
+
+.detalhe_page_conteiner {
+    padding: 2.5em 10em 7em 10em;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4em;
+    box-sizing: border-box;
+    transition: padding 0.35s ease;
+}
+
+/* Breadcrumb */
+.breadcrumb_nav {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    font-size: 0.82rem;
+    color: rgba(229, 234, 240, 0.6);
+    flex-wrap: wrap;
+}
+
+.breadcrumb_nav a {
+    color: rgba(229, 234, 240, 0.8);
+    transition: color 0.2s ease;
+}
+
+.breadcrumb_nav a:hover {
+    color: var(--tertiary-color);
+}
+
+.breadcrumb_nav .separator {
+    font-size: 0.65rem;
+    color: rgba(229, 234, 240, 0.35);
+}
+
+.breadcrumb_current {
+    color: var(--tertiary-color);
+    font-weight: 600;
+}
+
+/* Layout Grid Duas Colunas (Topo) */
+.produto_detalhe_grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 3.5em;
+    align-items: flex-start;
+    background-color: var(--quartenary-color);
+    border-radius: 12px;
+    padding: 3.5em;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Galeria Esquerda */
+.produto_galeria_box {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    position: sticky;
+    top: 100px;
+    min-width: 0;
+    width: 100%;
+}
+
+.produto_imagem_principal_box {
+    width: 100%;
+    height: 460px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5em;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+.produto_imagem_principal_box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
+}
+
+.produto_imagem_principal_box:hover img {
+    transform: scale(1.08);
+}
+
+.produto_thumbs_strip {
+    display: flex;
+    gap: 0.8em;
+    overflow-x: auto;
+    padding-bottom: 0.5em;
+    width: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(229, 234, 240, 0.2) transparent;
+}
+
+.produto_thumbs_strip::-webkit-scrollbar {
+    height: 4px;
+}
+
+.produto_thumbs_strip::-webkit-scrollbar-thumb {
+    background: rgba(229, 234, 240, 0.2);
+    border-radius: 2px;
+}
+
+.thumb_btn {
+    width: 72px;
+    height: 72px;
+    background-color: #ffffff;
+    border: 2px solid rgba(229, 234, 240, 0.2);
+    border-radius: 6px;
+    padding: 0.3em;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    box-sizing: border-box;
+}
+
+.thumb_btn img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.thumb_btn:hover {
+    border-color: var(--tertiary-color);
+    transform: translateY(-2px);
+}
+
+.thumb_btn.active {
+    border-color: var(--tertiary-color);
+    box-shadow: 0 0 0 2px var(--tertiary-shadow);
+}
+
+/* Informações da Direita */
+.produto_info_box {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    color: var(--secondary-color);
+    min-width: 0;
+    width: 100%;
+}
+
+.produto_header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+    min-width: 0;
+}
+
+.produto_marca_tag {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--tertiary-color);
+    text-transform: uppercase;
+}
+
+.produto_titulo {
+    font-size: 2.1rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    word-break: break-word;
+}
+
+.produto_meta_status {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    margin-top: 0.4em;
+    flex-wrap: wrap;
+}
+
+.status_badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.35em 0.8em;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+.status_badge.in_stock {
+    background-color: rgba(3, 195, 22, 0.15);
+    color: rgba(3, 195, 22, 0.688);
+    border: 1px solid rgba(3, 195, 22, 0.35);
+}
+
+.codigo_ref {
+    font-size: 0.78rem;
+    color: rgba(229, 234, 240, 0.45);
+    letter-spacing: 0.05em;
+}
+
+/* Bloco de Preço */
+.produto_preco_box {
+    background-color: rgba(229, 234, 240, 0.04);
+    border: 1px solid rgba(229, 234, 240, 0.08);
+    border-radius: 8px;
+    padding: 1.5em 1.8em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.preco_destaque {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3em;
+    color: var(--tertiary-color);
+    flex-wrap: wrap;
+}
+
+.preco_moeda {
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.preco_valor {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.preco_parcelas {
+    font-size: 0.88rem;
+    color: rgba(229, 234, 240, 0.75);
+    line-height: 1.5;
+}
+
+.preco_parcelas strong {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+/* Ações & Seletor de Quantidade */
+.produto_compra_form {
+    width: 100%;
+}
+
+.produto_acoes_box {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    width: 100%;
+}
+
+.detalhe_qtd_control {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(229, 234, 240, 0.08);
+    border: 1px solid rgba(229, 234, 240, 0.18);
+    border-radius: 6px;
+    overflow: hidden;
+    height: 52px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.detalhe_qty_btn {
+    background: transparent;
+    border: none;
+    color: var(--secondary-color);
+    width: 44px;
+    height: 100%;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.detalhe_qty_btn:hover {
+    background-color: var(--tertiary-color);
+    color: #ffffff;
+}
+
+.detalhe_qty_input {
+    width: 46px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    text-align: center;
+    color: var(--secondary-color);
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+    -moz-appearance: textfield;
+}
+
+.detalhe_qty_input::-webkit-outer-spin-button,
+.detalhe_qty_input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.produto_btn_comprar {
+    flex: 1;
+    min-height: 52px;
+    padding: 0 1.8em;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7em;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+/* Bloco de Especificações Técnicas */
+.especificacoes_tecnicas_bloco {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: rgba(229, 234, 240, 0.03);
+    border: 1px solid rgba(229, 234, 240, 0.08);
+    border-radius: 8px;
+    padding: 1.4em 1.6em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.specs_title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--tertiary-color);
+    text-transform: uppercase;
+}
+
+.specs_grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1em;
+    width: 100%;
+}
+
+.spec_card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    padding: 0.8em;
+    background-color: rgba(19, 19, 19, 0.5);
+    border-radius: 6px;
+    border: 1px solid rgba(229, 234, 240, 0.06);
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.spec_label {
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: rgba(229, 234, 240, 0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.spec_label i {
+    color: var(--tertiary-color);
+}
+
+.spec_val {
+    font-size: 0.84rem;
+    font-weight: 400;
+    color: var(--secondary-color);
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+/* Vantagens Oficiais */
+.produto_vantagens_grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1em;
+    padding: 1.5em 0;
+    border-top: 1px solid rgba(229, 234, 240, 0.1);
+    border-bottom: 1px solid rgba(229, 234, 240, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.vantagem_item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8em;
+    min-width: 0;
+}
+
+.vantagem_item i {
+    font-size: 1.3rem;
+    color: var(--tertiary-color);
+    margin-top: 0.15em;
+    flex-shrink: 0;
+}
+
+.vantagem_item strong {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    display: block;
+    margin-bottom: 0.2em;
+}
+
+.vantagem_item p {
+    font-size: 0.76rem;
+    line-height: 1.4;
+    color: rgba(229, 234, 240, 0.65);
+}
+
+/* ==========================================================================
+   Secção de Relacionados (Vitrine)
+   ========================================================================== */
+.relacionados_section {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5em;
+    margin-top: 2em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.relacionados_carousel_outer {
+    display: flex;
+    align-items: center;
+    gap: 1.4em;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Setas Laterais de Navegação (Padronizadas com a Home) */
+.vitrine_edge_arrow {
+    background-color: var(--quartenary-color);
+    border: 1px solid rgba(229, 234, 240, 0.16);
+    color: var(--secondary-color);
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    font-size: 1.15rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s var(--ease-spring), 
+                background-color 0.25s ease, 
+                border-color 0.25s ease, 
+                color 0.25s ease,
+                box-shadow 0.25s var(--ease-out-cubic);
+    box-sizing: border-box;
+}
+
+.vitrine_edge_arrow:hover:not(:disabled) {
+    background-color: #222222;
+    border-color: var(--tertiary-color);
+    color: var(--tertiary-color);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5), 0 0 10px var(--tertiary-shadow);
+    transform: scale(1.08);
+}
+
+.vitrine_edge_arrow:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.vitrine_edge_arrow:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    border-color: rgba(229, 234, 240, 0.08);
+}
+
+.relacionados_showcase_wrapper {
+    flex: 1;
+    min-width: 0;
+    min-height: 420px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.relacionados_showcase_wrapper .vitrine_page {
+    display: none;
+    width: 100%;
+}
+
+.relacionados_showcase_wrapper .vitrine_page.active {
+    display: block;
+}
+
+.relacionados_showcase_wrapper .vitrine_page.active .vitrine_card {
+    opacity: 0;
+    animation: vitrineCardIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.relacionados_showcase_wrapper .vitrine_page.active .vitrine_card:nth-child(1) {
+    animation-delay: 0.04s;
+}
+
+.relacionados_showcase_wrapper .vitrine_page.active .vitrine_card:nth-child(2) {
+    animation-delay: 0.10s;
+}
+
+.relacionados_showcase_wrapper .vitrine_page.active .vitrine_card:nth-child(3) {
+    animation-delay: 0.16s;
+}
+
+@keyframes vitrineCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.vitrine_grid,
+.relacionados_grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.8em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Estilização base do card de produto relacionado */
+.vitrine_card {
+    background-color: var(--quartenary-color, #1a1a1a);
+    border: 1px solid rgba(229, 234, 240, 0.08);
+    border-radius: 8px;
+    padding: 1.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    min-width: 0;
+}
+
+.vitrine_card:hover {
+    border-color: var(--tertiary-color);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.vitrine_card_tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--tertiary-color);
+    text-transform: uppercase;
+}
+
+.vitrine_card_img_box {
+    width: 100%;
+    height: 220px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.vitrine_card_img_box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.vitrine_card_img_box:hover img {
+    transform: scale(1.06);
+}
+
+.vitrine_card_info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    flex: 1;
+    min-width: 0;
+}
+
+.vitrine_card_title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Rodapé do Card (Preço e Botões Fluídos) */
+.vitrine_card_price_row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6em;
+    margin-top: auto;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.vitrine_card_price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--tertiary-color);
+    white-space: nowrap;
+    transition: font-size 0.3s ease;
+}
+
+.card_actions_group {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    flex-shrink: 0;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn_view_details {
+    background-color: var(--secondary-color);
+    color: var(--quartenary-color);
+    padding: 0.5em 0.8em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    white-space: nowrap;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    box-sizing: border-box;
+}
+
+.btn_view_details:hover {
+    background-color: var(--tertiary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 14px var(--tertiary-shadow);
+}
+
+.btn_cart_quick {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 4px;
+    background-color: rgba(229, 234, 240, 0.1);
+    border: 1px solid rgba(229, 234, 240, 0.18);
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-decoration: none;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    box-sizing: border-box;
+}
+
+.btn_cart_quick:hover {
+    background-color: var(--tertiary-color);
+    border-color: var(--tertiary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 12px var(--tertiary-shadow);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Indicadores Numéricos de Página (Padronizados com a Vitrine da Home)
+   ========================================================================== */
+.vitrine_pagination_conteiner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6em;
+    margin-top: 1.2em;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.vitrine_page_indicator {
+    padding: 0.4em 0.85em;
+    min-width: 32px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: var(--quartenary-color);
+    border: 1px solid rgba(229, 234, 240, 0.16);
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s var(--ease-spring), 
+                background-color 0.25s ease, 
+                border-color 0.25s ease, 
+                color 0.25s ease,
+                box-shadow 0.25s var(--ease-out-cubic);
+    box-sizing: border-box;
+}
+
+.vitrine_page_indicator:hover {
+    border-color: var(--tertiary-color);
+    color: var(--tertiary-color);
+    transform: translateY(-2px);
+}
+
+.vitrine_page_indicator.active {
+    background-color: var(--tertiary-color);
+    border-color: var(--tertiary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 12px var(--tertiary-shadow);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Media Queries Otimizadas e Responsividade Adaptativa
+   ========================================================================== */
+
+@media (max-width: 1280px) {
+    .detalhe_page_conteiner {
+        padding: 2.5em 5em 5em 5em;
+    }
+
+    .produto_detalhe_grid {
+        gap: 2.8em;
+        padding: 2.8em;
+    }
+
+    .produto_acoes_box {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .produto_btn_comprar {
+        flex: 1;
+        min-height: 52px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .detalhe_page_conteiner {
+        padding: 2em 3em 4.5em 3em;
+        gap: 3.5em;
+    }
+
+    .produto_detalhe_grid {
+        gap: 2.2em;
+        padding: 2.2em;
+    }
+
+    .produto_imagem_principal_box {
+        height: 400px;
+        padding: 2em;
+    }
+
+    .produto_titulo {
+        font-size: 1.85rem;
+    }
+
+    .preco_valor {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .detalhe_page_conteiner {
+        padding: 2em 2em 4em 2em;
+        gap: 3em;
+    }
+
+    .produto_detalhe_grid {
+        grid-template-columns: 1fr;
+        gap: 2.5em;
+        padding: 2.2em;
+    }
+
+    .produto_galeria_box {
+        position: static;
+        top: 0;
+    }
+
+    .produto_imagem_principal_box {
+        height: 380px;
+    }
+
+    .produto_vantagens_grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1em;
+    }
+
+    .relacionados_carousel_outer {
+        gap: 1em;
+    }
+
+    .vitrine_grid,
+    .relacionados_grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.4em;
+    }
+
+    .vitrine_card_price_row {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .detalhe_page_conteiner {
+        padding: 1.8em 1.2em 3.5em 1.2em;
+        gap: 2.5em;
+    }
+
+    .breadcrumb_nav {
+        font-size: 0.75rem;
+    }
+
+    .produto_detalhe_grid {
+        padding: 1.8em 1.2em;
+        border-radius: 10px;
+    }
+
+    .produto_imagem_principal_box {
+        height: 320px;
+        padding: 1.5em;
+    }
+
+    .thumb_btn {
+        width: 62px;
+        height: 62px;
+    }
+
+    .produto_titulo {
+        font-size: 1.55rem;
+    }
+
+    .produto_meta_status {
+        gap: 1em;
+    }
+
+    .preco_valor {
+        font-size: 2rem;
+    }
+
+    .produto_preco_box {
+        padding: 1.2em 1.4em;
+    }
+
+    .produto_acoes_box {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.8em;
+    }
+
+    .detalhe_qtd_control {
+        width: 100%;
+        justify-content: center;
+        height: 48px;
+    }
+
+    .produto_btn_comprar {
+        width: 100%;
+        min-height: 48px;
+        font-size: 0.88rem;
+    }
+
+    .specs_grid {
+        grid-template-columns: 1fr;
+        gap: 0.8em;
+    }
+
+    .produto_vantagens_grid {
+        grid-template-columns: 1fr;
+        gap: 1.2em;
+    }
+
+    .relacionados_carousel_outer {
+        gap: 0.8em;
+    }
+
+    .vitrine_edge_arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .vitrine_grid,
+    .relacionados_grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1em;
+    }
+
+    .vitrine_card {
+        padding: 1.2em;
+    }
+
+    .vitrine_card_img_box {
+        height: 180px;
+    }
+
+    .vitrine_card_price_row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.6em;
+    }
+
+    .card_actions_group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .btn_view_details {
+        flex: 1;
+    }
+}
+
+@media (max-width: 520px) {
+    .detalhe_page_conteiner {
+        padding: 1.2em 0.8em 3em 0.8em;
+        gap: 2em;
+    }
+
+    .produto_detalhe_grid {
+        padding: 1.4em 1em;
+    }
+
+    .produto_imagem_principal_box {
+        height: 250px;
+        padding: 1em;
+    }
+
+    .thumb_btn {
+        width: 54px;
+        height: 54px;
+    }
+
+    .produto_titulo {
+        font-size: 1.35rem;
+    }
+
+    .preco_moeda {
+        font-size: 1.1rem;
+    }
+
+    .preco_valor {
+        font-size: 1.75rem;
+    }
+
+    .preco_parcelas {
+        font-size: 0.8rem;
+    }
+
+    .relacionados_carousel_outer {
+        gap: 0.4em;
+    }
+
+    .vitrine_edge_arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 0.85rem;
+    }
+
+    .vitrine_grid,
+    .relacionados_grid {
+        grid-template-columns: 1fr;
+        gap: 1em;
+    }
+
+    .vitrine_card_price_row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .card_actions_group {
+        width: auto;
+    }
+
+    .btn_view_details {
+        flex: initial;
+    }
+}
+
+
+/* ==========================================================================
+   Secção de Relacionados (Vitrine Padronizada e Idêntica à Home)
+   ========================================================================== */
+.relacionados_section {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5em;
+    margin-top: 2em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.relacionados_carousel_outer {
+    display: flex;
+    align-items: center;
+    gap: 1.4em;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.relacionados_showcase_wrapper {
+    flex: 1;
+    min-width: 0;
+    min-height: 420px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.relacionados_showcase_wrapper .vitrine_page {
+    display: none;
+    width: 100%;
+}
+
+.relacionados_showcase_wrapper .vitrine_page.active {
+    display: block;
+}
+
+.relacionados_showcase_wrapper .vitrine_grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.8em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Card de Relacionados espelhado exatamente na Vitrine da Home */
+.relacionados_section .vitrine_card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--quartenary-color);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(229, 234, 240, 0.06);
+    padding: 0 !important;
+    transition: transform 0.35s var(--ease-out-cubic), 
+                box-shadow 0.35s var(--ease-out-cubic), 
+                border-color 0.25s ease;
+}
+
+.relacionados_section .vitrine_card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 36px -6px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--tertiary-color);
+    border-color: rgba(3, 195, 22, 0.3);
+}
+
+.relacionados_section .vitrine_card_tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: rgba(19, 19, 19, 0.88);
+    color: var(--tertiary-color);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.3em 0.8em;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+    z-index: 2;
+    border: 1px solid var(--tertiary-shadow);
+    backdrop-filter: blur(4px);
+    text-transform: uppercase;
+}
+
+.relacionados_section .vitrine_card_img_box {
+    width: 100%;
+    height: 260px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5em;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+.relacionados_section .vitrine_card_img_box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.45s var(--ease-out-cubic);
+}
+
+.relacionados_section .vitrine_card:hover .vitrine_card_img_box img {
+    transform: scale(1.06);
+}
+
+.relacionados_section .vitrine_card_info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    padding: 1.5em !important;
+    flex: 1;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.relacionados_section .vitrine_card_title {
+    color: var(--secondary-color);
+    font-size: 1.02rem;
+    font-weight: 500;
+    line-height: 1.4;
+    min-height: 2.8em;
+    letter-spacing: 0.01em;
+    transition: color 0.2s ease;
+}
+
+.relacionados_section .vitrine_card_info a:hover .vitrine_card_title {
+    color: var(--tertiary-color);
+}
+
+/* Linha de Preço e Botões perfeitamente alinhada e horizontal */
+.relacionados_section .vitrine_card_price_row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.5em !important;
+    margin-top: 0.8em !important;
+    padding-top: 0.9em !important;
+    border-top: 1px solid rgba(229, 234, 240, 0.1);
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.relacionados_section .vitrine_card_price {
+    color: var(--tertiary-color);
+    font-size: 1.15rem !important;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap !important;
+}
+
+.relacionados_section .card_actions_group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.4em !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+}
+
+.relacionados_section .btn_cart_quick {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    padding: 0 !important;
+    border-radius: 4px;
+    background-color: rgba(229, 234, 240, 0.1);
+    border: 1px solid rgba(229, 234, 240, 0.18);
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+/* Media Queries Responsivas para os Relacionados */
+@media (max-width: 992px) {
+    .relacionados_showcase_wrapper .vitrine_grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.4em;
+    }
+}
+
+@media (max-width: 600px) {
+    .relacionados_showcase_wrapper .vitrine_grid {
+        grid-template-columns: 1fr;
+        gap: 1.2em;
+    }
+}
+
+
+/* ==========================================================================
+   Comportamento Responsivo Definitivo da Vitrine de Relacionados
+   ========================================================================== */
+
+/* Em ecrã grande (Desktop): Preço e botões lado a lado */
+.relacionados_section .vitrine_card_price_row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.relacionados_section .vitrine_card_price {
+    font-size: 1.15rem !important;
+    white-space: nowrap !important;
+}
+
+.relacionados_section .card_actions_group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.4em !important;
+    flex-shrink: 0 !important;
+}
+
+/* Quando o ecrã reduz (tablets e telemóveis): Botões vão para baixo do preço */
+@media (max-width: 768px) {
+    .relacionados_section .vitrine_card_price_row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.6em !important;
+    }
+
+    .relacionados_section .card_actions_group {
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+
+    .relacionados_section .btn_view_details {
+        flex: 1 !important;
+    }
+}

@@ -1,0 +1,348 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ guitarra.marca.marca }} {{ guitarra.modelo }} | MÙSIC Shop{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/detalhe.css' %}">
+{% endblock extra_css %}
+
+{% block conteudo_principal %}
+<div class="detalhe_page_conteiner">
+    <!-- Breadcrumb de Navegação -->
+    <nav class="breadcrumb_nav" aria-label="Navegação estrutural">
+        <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i> Início</a>
+        <i class="fa-solid fa-chevron-right separator"></i>
+        <a href="{% url 'home' %}#vitrine">Vitrine</a>
+        <i class="fa-solid fa-chevron-right separator"></i>
+        <span>{{ guitarra.marca.marca }}</span>
+        <i class="fa-solid fa-chevron-right separator"></i>
+        <span class="breadcrumb_current">{{ guitarra.modelo }}</span>
+    </nav>
+
+    <!-- Grid de Detalhes do Produto (Layout Split) -->
+    <section class="produto_detalhe_grid">
+        <!-- Coluna Esquerda: Galeria de Imagens (Sticky) -->
+        <div class="produto_galeria_box">
+            <div class="produto_imagem_principal_box">
+                {% if guitarra.ilustracao %}
+                <img id="main_product_image" src="{{ guitarra.ilustracao.url }}" alt="{{ guitarra.marca.marca }} {{ guitarra.modelo }}" loading="eager">
+                {% else %}
+                <div class="no_img_box"><i class="fa-solid fa-guitar"></i></div>
+                {% endif %}
+            </div>
+
+            {% if imagens_galeria %}
+            <div class="produto_thumbs_strip">
+                {% if guitarra.ilustracao %}
+                <button type="button" class="thumb_btn active" data-img-url="{{ guitarra.ilustracao.url }}" aria-label="Ver imagem principal">
+                    <img src="{{ guitarra.ilustracao.url }}" alt="{{ guitarra.modelo }} - Ilustração">
+                </button>
+                {% endif %}
+                {% for img in imagens_galeria %}
+                <button type="button" class="thumb_btn" data-img-url="{{ img.imagem.url }}" aria-label="Ver detalhe {{ forloop.counter }}">
+                    <img src="{{ img.imagem.url }}" alt="{{ guitarra.modelo }} - Detalhe {{ forloop.counter }}">
+                </button>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Coluna Direita: Informações, Compra & Especificações -->
+        <div class="produto_info_box">
+            <div class="produto_header">
+                <span class="produto_marca_tag">{{ guitarra.marca.marca }}</span>
+                <h1 class="produto_titulo">{{ guitarra.marca.marca }} {{ guitarra.modelo }}</h1>
+                <div class="produto_meta_status">
+                    <span class="status_badge in_stock">
+                        <i class="fa-solid fa-circle-check"></i> EM ESTOQUE &bull; PRONTA ENTREGA
+                    </span>
+                    <span class="codigo_ref">REF: #GS-{{ guitarra.id|stringformat:"04d" }}</span>
+                </div>
+            </div>
+
+            <div class="produto_preco_box">
+                <div class="preco_destaque">
+                    <span class="preco_moeda">R$</span>
+                    <span class="preco_valor">{{ guitarra.preco }}</span>
+                </div>
+                <p class="preco_parcelas">
+                    Em até <strong>12x de R$ {{ guitarra.preco|floatformat:2 }}</strong> sem juros no cartão ou <strong>5% OFF</strong> no Pix
+                </p>
+            </div>
+
+            <!-- Seletor de Quantidade & Botão Principal CTA Adicionar ao Carrinho -->
+            <form action="{% url 'adicionar_ao_carrinho' guitarra.id %}" method="POST" class="produto_compra_form" id="detalhe_add_form">
+                {% csrf_token %}
+                <div class="produto_acoes_box">
+                    <div class="detalhe_qtd_control">
+                        <button type="button" class="detalhe_qty_btn" id="btn_detalhe_decrease" aria-label="Diminuir quantidade">-</button>
+                        <input type="number" name="quantidade" id="detalhe_qtd_input" class="detalhe_qty_input" value="1" min="1" max="99" readonly>
+                        <button type="button" class="detalhe_qty_btn" id="btn_detalhe_increase" aria-label="Aumentar quantidade">+</button>
+                    </div>
+                    <button type="submit" 
+                            class="site_btn btn1 btn_add_to_cart produto_btn_comprar" 
+                            data-guitarra-id="{{ guitarra.id }}" 
+                            data-guitarra-nome="{{ guitarra.marca.marca }} {{ guitarra.modelo }}">
+                        <i class="fa-solid fa-cart-plus"></i> ADICIONAR AO CARRINHO
+                    </button>
+                </div>
+            </form>
+
+            <!-- Bloco de Especificações Técnicas Dinâmicas -->
+            {% if guitarra.madeiras or guitarra.captadores or guitarra.ponte_trastes or guitarra.acabamento %}
+            <div class="especificacoes_tecnicas_bloco">
+                <h4 class="specs_title">ESPECIFICAÇÕES TÉCNICAS</h4>
+                <div class="specs_grid">
+                    {% if guitarra.madeiras %}
+                    <div class="spec_card">
+                        <span class="spec_label"><i class="fa-solid fa-tree"></i> Madeiras</span>
+                        <span class="spec_val">{{ guitarra.madeiras }}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if guitarra.captadores %}
+                    <div class="spec_card">
+                        <span class="spec_label"><i class="fa-solid fa-bolt"></i> Captadores</span>
+                        <span class="spec_val">{{ guitarra.captadores }}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if guitarra.ponte_trastes %}
+                    <div class="spec_card">
+                        <span class="spec_label"><i class="fa-solid fa-sliders"></i> Ponte &amp; Trastes</span>
+                        <span class="spec_val">{{ guitarra.ponte_trastes }}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if guitarra.acabamento %}
+                    <div class="spec_card">
+                        <span class="spec_label"><i class="fa-solid fa-wand-magic-sparkles"></i> Acabamento</span>
+                        <span class="spec_val">{{ guitarra.acabamento }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Vantagens Oficiais -->
+            <div class="produto_vantagens_grid">
+                <div class="vantagem_item">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <div>
+                        <strong>Envio Protegido</strong>
+                        <p>Seguro total contra danos no transporte.</p>
+                    </div>
+                </div>
+                <div class="vantagem_item">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <div>
+                        <strong>Regulagem Inclusa</strong>
+                        <p>Instrumento ajustado por luthier antes do envio.</p>
+                    </div>
+                </div>
+                <div class="vantagem_item">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <div>
+                        <strong>Garantia de 1 Ano</strong>
+                        <p>Suporte e garantia oficial da MÙSIC Shop.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guitarras Relacionadas da Mesma Marca (Carrossel com Setas nas Extremidades) -->
+    {% if guitarras_relacionadas %}
+    <section class="relacionados_section">
+        <div class="site_section_title_box">
+            <h2>MAIS GUITARRAS {{ guitarra.marca.marca|upper }}</h2>
+            <hr class="section_title_underline">
+        </div>
+
+        <div class="vitrine_carousel_outer relacionados_carousel_outer">
+            <button type="button" class="vitrine_edge_arrow vitrine_edge_arrow_prev" id="relacionados_arrow_prev" aria-label="Página anterior de guitarras relacionadas" title="Página anterior">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div class="vitrine_showcase_wrapper relacionados_showcase_wrapper" id="relacionados_showcase" data-total-pages="{{ total_paginas_relacionadas }}">
+                {% for pagina in paginas_relacionadas %}
+                <div class="vitrine_page {% if forloop.first %}active{% endif %}" data-page="{{ forloop.counter }}">
+                    <div class="vitrine_grid">
+                        {% for item in pagina %}
+                        <div class="vitrine_card">
+                            <span class="vitrine_card_tag">{{ item.marca.marca }}</span>
+                            <a href="{% url 'detalhe_guitarra' item.id %}" class="vitrine_card_img_box" aria-label="Ver detalhes de {{ item.marca.marca }} {{ item.modelo }}">
+                                {% if item.ilustracao %}
+                                <img src="{{ item.ilustracao.url }}" alt="{{ item.marca.marca }} {{ item.modelo }}" loading="lazy">
+                                {% else %}
+                                <div class="no_img_box"><i class="fa-solid fa-guitar"></i></div>
+                                {% endif %}
+                            </a>
+                            <div class="vitrine_card_info">
+                                <a href="{% url 'detalhe_guitarra' item.id %}">
+                                    <h3 class="vitrine_card_title">{{ item.marca.marca }} {{ item.modelo }}</h3>
+                                </a>
+                                <div class="vitrine_card_price_row">
+                                    <span class="vitrine_card_price">R$ {{ item.preco }}</span>
+                                    <div class="card_actions_group">
+                                        <a href="{% url 'detalhe_guitarra' item.id %}" class="site_btn btn_view_details">
+                                            VER DETALHES
+                                        </a>
+                                        <a href="{% url 'adicionar_ao_carrinho' item.id %}" 
+                                           class="site_btn btn_cart_quick btn_add_to_cart" 
+                                           data-guitarra-id="{{ item.id }}" 
+                                           data-guitarra-nome="{{ item.marca.marca }} {{ item.modelo }}"
+                                           title="Adicionar ao Carrinho"
+                                           aria-label="Adicionar {{ item.marca.marca }} {{ item.modelo }} ao carrinho">
+                                            <i class="fa-solid fa-cart-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <button type="button" class="vitrine_edge_arrow vitrine_edge_arrow_next" id="relacionados_arrow_next" aria-label="Próxima página de guitarras relacionadas" title="Próxima página">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Indicadores de Página dos Relacionados -->
+        <div class="vitrine_pagination_conteiner" id="relacionados_pagination"></div>
+    </section>
+    {% endif %}
+</div>
+{% endblock conteudo_principal %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Galeria de Imagens com Miniaturas
+    const mainImg = document.getElementById('main_product_image');
+    const thumbBtns = document.querySelectorAll('.produto_thumbs_strip .thumb_btn');
+
+    if (mainImg && thumbBtns.length) {
+        thumbBtns.forEach((btn) => {
+            btn.addEventListener('click', function () {
+                const targetUrl = this.dataset.imgUrl;
+                if (!targetUrl || this.classList.contains('active')) return;
+
+                thumbBtns.forEach((b) => b.classList.remove('active'));
+                this.classList.add('active');
+
+                mainImg.style.opacity = '0';
+                mainImg.style.transform = 'scale(0.96)';
+                setTimeout(() => {
+                    mainImg.src = targetUrl;
+                    mainImg.style.opacity = '1';
+                    mainImg.style.transform = 'scale(1)';
+                }, 180);
+            });
+        });
+    }
+
+    // Controle de Quantidade da Página de Detalhe
+    const qtdInput = document.getElementById('detalhe_qtd_input');
+    const btnDecrease = document.getElementById('btn_detalhe_decrease');
+    const btnIncrease = document.getElementById('btn_detalhe_increase');
+
+    if (qtdInput && btnDecrease && btnIncrease) {
+        btnDecrease.addEventListener('click', () => {
+            let val = parseInt(qtdInput.value, 10) || 1;
+            if (val > 1) {
+                qtdInput.value = val - 1;
+            }
+        });
+
+        btnIncrease.addEventListener('click', () => {
+            let val = parseInt(qtdInput.value, 10) || 1;
+            if (val < 99) {
+                qtdInput.value = val + 1;
+            }
+        });
+    }
+
+    // Navegação e Paginação por Setas dos Produtos Relacionados (Sem Rolagem Vertical)
+    initRelacionadosCarousel();
+});
+
+function initRelacionadosCarousel() {
+    const showcase = document.getElementById('relacionados_showcase');
+    const arrowPrev = document.getElementById('relacionados_arrow_prev');
+    const arrowNext = document.getElementById('relacionados_arrow_next');
+    const paginationContainer = document.getElementById('relacionados_pagination');
+
+    if (!showcase || !arrowPrev || !arrowNext) return;
+
+    const pages = showcase.querySelectorAll('.vitrine_page');
+    const totalPages = pages.length;
+    let currentPage = 1;
+
+    function updateView() {
+        // Exibe a página correta com reflow para acionar animação fluida
+        pages.forEach((page) => {
+            const p = parseInt(page.dataset.page, 10);
+            if (p === currentPage) {
+                page.classList.remove('active');
+                void page.offsetWidth;
+                page.classList.add('active');
+            } else {
+                page.classList.remove('active');
+            }
+        });
+
+        // Controle de visibilidade e estado das setas
+        if (totalPages <= 1) {
+            arrowPrev.style.display = 'none';
+            arrowNext.style.display = 'none';
+        } else {
+            arrowPrev.style.display = 'inline-flex';
+            arrowNext.style.display = 'inline-flex';
+            arrowPrev.disabled = currentPage === 1;
+            arrowNext.disabled = currentPage === totalPages;
+        }
+
+        // Indicadores numéricos compactos
+        if (paginationContainer) {
+            paginationContainer.innerHTML = '';
+            if (totalPages > 1) {
+                for (let i = 1; i <= totalPages; i++) {
+                    const indicator = document.createElement('button');
+                    indicator.className = `vitrine_page_indicator ${i === currentPage ? 'active' : ''}`;
+                    indicator.textContent = i;
+                    indicator.type = 'button';
+                    indicator.title = `Página ${i} de ${totalPages}`;
+                    indicator.setAttribute('aria-label', `Página ${i} de ${totalPages}`);
+                    indicator.addEventListener('click', () => {
+                        currentPage = i;
+                        updateView();
+                    });
+                    paginationContainer.appendChild(indicator);
+                }
+            }
+        }
+    }
+
+    arrowPrev.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            updateView();
+        }
+    });
+
+    arrowNext.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            updateView();
+        }
+    });
+
+    updateView();
+}
+</script>
+{% endblock extra_js %}

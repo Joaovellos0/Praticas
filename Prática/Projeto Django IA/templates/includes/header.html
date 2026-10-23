@@ -1,0 +1,46 @@
+{% load static %}
+<header class="header_conteiner">
+    <a href="{% url 'home' %}" class="header_logo" aria-label="MÙSIC Shop Início">  
+        <div class="bg_logo">
+            <h2>GÙITAR</h2>
+        </div>
+        <h3>Shop</h3>
+    </a>
+
+    {% block header_middle %}
+    {# Oculta vitrine e barra de pesquisa estritamente na página de cadastro #}
+    {% if request.resolver_match.url_name != 'cadastro' %}
+    <nav class="header_nav">
+        <div class="searchbar_wrapper">
+            <div class="searchbar">
+                <label for="search" aria-label="Pesquisar guitarra"><i class="fa-solid fa-magnifying-glass"></i></label>
+                <input type="text" id="search" placeholder="Buscar guitarra..." autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-controls="search_dropdown">
+                <button type="button" class="search_clear_btn" id="search_clear" aria-label="Limpar busca" style="display: none;">&times;</button>
+            </div>  
+            <!-- Dropdown Suspenso do Autocomplete em Tempo Real -->
+            <div class="search_dropdown" id="search_dropdown" aria-live="polite"></div>
+        </div>
+        <a href="{% url 'home' %}#vitrine">VITRINE</a>
+    </nav>
+    {% endif %}
+    {% endblock header_middle %}
+
+    <div class="header_icons">
+        {# Oculta carrinho na página de carrinho e na de cadastro/login #}
+        {% if request.resolver_match.url_name != 'carrinho' and request.resolver_match.url_name != 'cadastro' and request.resolver_match.url_name != 'login' %}
+        <a href="{% url 'carrinho' %}" class="header_cart_link" title="Meu Carrinho" aria-label="Carrinho de Compras">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart_badge" id="cart_badge" {% if not cart_total_items or cart_total_items == 0 %}style="display: none;"{% endif %}>
+                {{ cart_total_items|default:0 }}
+            </span>
+        </a>
+        {% endif %}
+
+        {# Oculta usuário na página de cadastro e login #}
+        {% if request.resolver_match.url_name != 'cadastro' and request.resolver_match.url_name != 'login' %}
+        <button id="user_btn" class="header_user_btn" type="button" title="Minha Conta" aria-label="Acessar Conta">
+            <i class="fa-solid fa-user"></i>
+        </button>
+        {% endif %}
+    </div>
+</header>

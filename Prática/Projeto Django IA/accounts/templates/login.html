@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Login | GÙITAR Shop{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock extra_css %}
+
+{% block conteudo_principal %}
+<section class="login_page_section">
+    <div class="login_card_container">
+        {% if request.GET.next == '/carrinho/' or 'carrinho' in request.GET.next %}
+        <div class="login_cart_notice">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Faça login para acessar seu carrinho e continuar de onde parou.</span>
+        </div>
+        {% endif %}
+
+        <div class="login_card_header">
+            <div class="login_logo_badge">
+                <i class="fa-solid fa-guitar"></i>
+            </div>
+            <h2>LOGIN DE CLIENTE</h2>
+            <p>Entre com seus dados para continuar suas compras.</p>
+            <hr class="section_title_underline">
+        </div>
+
+        <form action="{% url 'login' %}" method="POST" class="login_page_form">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.GET.next|default:'home' }}">
+
+            <div class="form_group">
+                <label for="login_nome">Nome de Usuário</label>
+                <div class="input_with_icon">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="login_nome" name="nome" value="{{ nome|default:'' }}" placeholder="Digite seu usuário" required autocomplete="username">
+                </div>
+            </div>
+
+            <div class="form_group">
+                <label for="login_senha">Senha</label>
+                <div class="input_with_icon">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="login_senha" name="senha" placeholder="Digite sua senha" required autocomplete="current-password">
+                </div>
+            </div>
+
+            <button type="submit" class="site_btn btn1 btn_submit_login">
+                ENTRAR NA CONTA
+            </button>
+        </form>
+
+        <div class="login_card_divider">
+            <span>OU</span>
+        </div>
+
+        <div class="login_card_footer">
+            <p>Ainda não possui uma conta?</p>
+            <a href="{% url 'cadastro' %}" class="site_btn btn_go_register">
+                CRIAR CONTA AGORA
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock conteudo_principal %}

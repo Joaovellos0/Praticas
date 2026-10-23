@@ -1,0 +1,248 @@
+/* ==========================================================================
+   MÙSIC Shop - Estilos da Página de Cadastro de Clientes
+   Aesthetic: Luxo Contemporâneo, Tipografia Refinada
+   ========================================================================== */
+
+.cadastro_section {
+    padding: 3.5em 10em 7em 10em;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.cadastro_container {
+    background-color: var(--quartenary-color);
+    border-radius: 12px;
+    padding: 3.5em 4em;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(229, 234, 240, 0.08);
+}
+
+.cadastro_header {
+    text-align: center;
+    margin-bottom: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6em;
+}
+
+.section_title_underline {
+    border: none;
+    height: 2px;
+    width: 5em;
+    background-color: var(--tertiary-color);
+}
+
+.cadastro_badge {
+    color: var(--tertiary-color);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.cadastro_header h2 {
+    font-size: 1.85rem;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+}
+
+.cadastro_header p {
+    font-size: 0.9rem;
+    color: rgba(229, 234, 240, 0.72);
+    max-width: 580px;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   Grid em Duas Colunas (Dados Pessoais + Endereço)
+   ========================================================================== */
+.cadastro_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5em;
+}
+
+.cadastro_card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4em;
+}
+
+.cadastro_card_header {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    padding-bottom: 0.8em;
+    border-bottom: 1px solid rgba(229, 234, 240, 0.12);
+}
+
+.cadastro_card_header i {
+    color: var(--tertiary-color);
+    font-size: 1.2rem;
+}
+
+.cadastro_card_header h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    letter-spacing: 0.04em;
+}
+
+.cadastro_card .form_group label {
+    color: rgba(229, 234, 240, 0.88);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.cadastro_card .input_with_icon {
+    background-color: rgba(229, 234, 240, 0.06);
+    border: 1px solid rgba(229, 234, 240, 0.18);
+    border-radius: 6px;
+    transition: border-color 0.25s ease, box-shadow 0.25s var(--ease-out-cubic);
+}
+
+.cadastro_card .input_with_icon input {
+    color: var(--secondary-color);
+    font-weight: 400;
+}
+
+.cadastro_card .input_with_icon input::placeholder {
+    color: rgba(229, 234, 240, 0.38);
+    font-weight: 300;
+}
+
+.cadastro_card .input_with_icon:focus-within {
+    border-color: var(--tertiary-color);
+    box-shadow: 0 0 0 3px var(--tertiary-shadow);
+    background-color: rgba(229, 234, 240, 0.09);
+}
+
+.cep_input_wrapper {
+    position: relative;
+}
+
+.cep_status_spinner {
+    position: absolute;
+    right: 12px;
+    color: var(--tertiary-color);
+    font-size: 0.95rem;
+    pointer-events: none;
+}
+
+.cep_feedback_msg {
+    font-size: 0.78rem;
+    margin-top: 0.3em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.cep_feedback_msg.success {
+    color: var(--tertiary-color);
+}
+
+.cep_feedback_msg.error {
+    color: #e53935;
+}
+
+.cep_feedback_msg.warning {
+    color: #ffa726;
+}
+
+.form_row_two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2em;
+}
+
+/* ==========================================================================
+   Ações Finais de Envio
+   ========================================================================== */
+.cadastro_footer_actions {
+    margin-top: 3.5em;
+    padding-top: 2.2em;
+    border-top: 1px solid rgba(229, 234, 240, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+}
+
+.btn_submit_cadastro {
+    padding: 1.1em 4em;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.cadastro_already {
+    font-size: 0.88rem;
+    color: rgba(229, 234, 240, 0.7);
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    font-weight: 300;
+}
+
+.cadastro_already a {
+    color: var(--tertiary-color);
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.cadastro_already a:hover {
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Media Queries do Cadastro
+   ========================================================================== */
+@media (max-width: 1200px) {
+    .cadastro_section {
+        padding: 3em 4em 5em 4em;
+    }
+
+    .cadastro_container {
+        padding: 3em 2.5em;
+    }
+
+    .cadastro_grid {
+        gap: 2.5em;
+    }
+}
+
+@media (max-width: 850px) {
+    .cadastro_section {
+        padding: 2.5em 1.5em 4em 1.5em;
+    }
+
+    .cadastro_container {
+        padding: 2.5em 1.5em;
+    }
+
+    .cadastro_grid {
+        grid-template-columns: 1fr;
+        gap: 2em;
+    }
+
+    .btn_submit_cadastro {
+        width: 100%;
+        padding: 1em;
+    }
+}
+
+@media (max-width: 500px) {
+    .form_row_two {
+        grid-template-columns: 1fr;
+    }
+
+    .cadastro_header h2 {
+        font-size: 1.55rem;
+    }
+}

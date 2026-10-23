@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Criar Conta | MÙSIC Shop{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+{% endblock extra_css %}
+
+{% block header_wrapper %}
+<!-- Cabeçalho limpo exclusivo da página de cadastro: apenas o logotipo centralizado/elegante -->
+<div class="header_standard">
+    <header class="header_conteiner header_clean">
+        <a href="{% url 'home' %}" class="header_logo" aria-label="MÙSIC Shop Início">  
+            <div class="bg_logo">
+                <h2>MÙSIC</h2>
+            </div>
+            <h3>Shop</h3>
+        </a>
+    </header>
+</div>
+{% endblock header_wrapper %}
+
+{% block conteudo_principal %}
+<section class="cadastro_section">
+    <div class="cadastro_container">
+        <div class="cadastro_header">
+            <span class="cadastro_badge">NOVO CLIENTE</span>
+            <h2>CRIE SUA CONTA NO MÙSIC SHOP</h2>
+            <p>Cadastre-se para acompanhar pedidos, salvar guitarras favoritas e agilizar suas compras.</p>
+            <hr class="section_title_underline">
+        </div>
+
+        <form action="{% url 'cadastro' %}" method="POST" class="cadastro_form">
+            {% csrf_token %}
+
+            <div class="cadastro_grid">
+                <!-- Seção 1: Dados Pessoais & Acesso -->
+                <div class="cadastro_card">
+                    <div class="cadastro_card_header">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <h3>1. Dados de Acesso</h3>
+                    </div>
+
+                    <div class="form_group">
+                        <label for="cad_nome">Nome de Usuário *</label>
+                        <div class="input_with_icon">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="cad_nome" name="nome" value="{{ form_data.nome|default:'' }}" placeholder="Ex: hendrix99" required autocomplete="username">
+                        </div>
+                    </div>
+
+                    <div class="form_group">
+                        <label for="cad_email">E-mail *</label>
+                        <div class="input_with_icon">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" id="cad_email" name="email" value="{{ form_data.email|default:'' }}" placeholder="seu.email@exemplo.com" required autocomplete="email">
+                        </div>
+                    </div>
+
+                    <div class="form_group">
+                        <label for="cad_senha">Senha *</label>
+                        <div class="input_with_icon">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="cad_senha" name="senha" placeholder="Mínimo de 8 caracteres" required autocomplete="new-password">
+                        </div>
+                    </div>
+
+                    <div class="form_group">
+                        <label for="cad_telefone">Telefone / WhatsApp</label>
+                        <div class="input_with_icon">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" id="cad_telefone" name="telefone" value="{{ form_data.telefone|default:'' }}" placeholder="Ex: 988887777" maxlength="9">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção 2: Endereço de Entrega com Preenchimento Automático por CEP -->
+                <div class="cadastro_card">
+                    <div class="cadastro_card_header">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <h3>2. Endereço de Entrega</h3>
+                    </div>
+
+                    <div class="form_group">
+                        <label for="id_cep">CEP</label>
+                        <div class="input_with_icon cep_input_wrapper">
+                            <i class="fa-solid fa-mail-bulk"></i>
+                            <input type="text" id="id_cep" name="cep" value="{{ form_data.cep|default:'' }}" placeholder="Ex: 01001-000" maxlength="9" autocomplete="postal-code">
+                            <span class="cep_status_spinner" id="cep_spinner" style="display: none;" title="Buscando endereço...">
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+                            </span>
+                        </div>
+                        <span class="cep_feedback_msg" id="cep_feedback" style="display: none;"></span>
+                    </div>
+
+                    <div class="form_group">
+                        <label for="cad_logradouro">Logradouro / Rua</label>
+                        <div class="input_with_icon">
+                            <i class="fa-solid fa-road"></i>
+                            <input type="text" id="cad_logradouro" name="logradouro" value="{{ form_data.logradouro|default:'' }}" placeholder="Rua, Avenida, Praça...">
+                        </div>
+                    </div>
+
+                    <div class="form_row_two">
+                        <div class="form_group">
+                            <label for="cad_numero">Número</label>
+                            <div class="input_with_icon">
+                                <i class="fa-solid fa-hashtag"></i>
+                                <input type="text" id="cad_numero" name="numero" value="{{ form_data.numero|default:'' }}" placeholder="Ex: 120">
+                            </div>
+                        </div>
+
+                        <div class="form_group">
+                            <label for="cad_complemento">Complemento</label>
+                            <div class="input_with_icon">
+                                <i class="fa-solid fa-building"></i>
+                                <input type="text" id="cad_complemento" name="complemento" value="{{ form_data.complemento|default:'' }}" placeholder="Apto, Bloco, etc.">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form_row_two">
+                        <div class="form_group">
+                            <label for="cad_bairro">Bairro</label>
+                            <div class="input_with_icon">
+                                <i class="fa-solid fa-tree-city"></i>
+                                <input type="text" id="cad_bairro" name="bairro" value="{{ form_data.bairro|default:'' }}" placeholder="Ex: Centro">
+                            </div>
+                        </div>
+
+                        <div class="form_group">
+                            <label for="cad_cidade">Cidade</label>
+                            <div class="input_with_icon">
+                                <i class="fa-solid fa-city"></i>
+                                <input type="text" id="cad_cidade" name="cidade" value="{{ form_data.cidade|default:'' }}" placeholder="Ex: São Paulo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form_group">
+                        <label for="cad_estado">Estado (UF)</label>
+                        <div class="input_with_icon">
+                            <i class="fa-solid fa-map"></i>
+                            <input type="text" id="cad_estado" name="estado" value="{{ form_data.estado|default:'' }}" placeholder="Ex: SP" maxlength="2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cadastro_footer_actions">
+                <button type="submit" class="site_btn btn1 btn_submit_cadastro">
+                    <i class="fa-solid fa-check"></i> FINALIZAR CADASTRO
+                </button>
+                <div class="cadastro_already">
+                    <span>Já tem uma conta cadastrada?</span>
+                    <a href="{% url 'login' %}">Faça Login aqui</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock conteudo_principal %}
+
+{% block extra_js %}
+<script src="{% static 'js/cadastro.js' %}"></script>
+{% endblock extra_js %}

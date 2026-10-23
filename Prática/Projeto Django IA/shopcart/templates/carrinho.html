@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Meu Carrinho | MÙSIC Shop{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/carrinho.css' %}">
+{% endblock extra_css %}
+
+{% block conteudo_principal %}
+<section class="carrinho_section">
+    <div class="site_section_title_box">
+        <h2>MEU CARRINHO DE COMPRAS</h2>
+        <hr class="section_title_underline">
+    </div>
+
+    {% if not request.user.is_authenticated %}
+    <!-- Estado: Usuário Não Autenticado -->
+    <div class="carrinho_auth_banner_box">
+        <div class="auth_banner_icon">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <i class="fa-solid fa-lock auth_lock_badge"></i>
+        </div>
+        <h3>SUA SACOLA ESTÁ AGUARDANDO POR VOCÊ</h3>
+        <p>Sua sacola está aguardando por você. Faça login para visualizar seus itens e finalizar suas compras.</p>
+        <div class="auth_banner_actions">
+            <a href="{% url 'login' %}?next={% url 'carrinho' %}" class="site_btn btn1 btn_auth_login">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i> FAZER LOGIN
+            </a>
+            <a href="{% url 'home' %}#vitrine" class="site_btn btn_auth_explore">
+                <i class="fa-solid fa-compass"></i> EXPLORAR CATÁLOGO
+            </a>
+        </div>
+    </div>
+    {% elif cart_total_items > 0 %}
+    <div class="carrinho_layout">
+        <!-- Lista de Produtos -->
+        <div class="carrinho_items_wrapper">
+            <div class="carrinho_table_header">
+                <span class="th_produto">PRODUTO</span>
+                <span class="th_preco">PREÇO UNITÁRIO</span>
+                <span class="th_qtd">QUANTIDADE</span>
+                <span class="th_subtotal">SUBTOTAL</span>
+                <span class="th_acao">REMOVER</span>
+            </div>
+
+            <div class="carrinho_items_list">
+                {% for item in cart %}
+                <div class="carrinho_item_row" id="cart_row_{{ item.id }}">
+                    <div class="item_product_info">
+                        <div class="item_img_box">
+                            {% if item.guitarra.ilustracao %}
+                            <img src="{{ item.guitarra.ilustracao.url }}" alt="{{ item.guitarra.marca }} {{ item.guitarra.modelo }}">
+                            {% else %}
+                            <div class="no_img_box"><i class="fa-solid fa-guitar"></i></div>
+                            {% endif %}
+                        </div>
+                        <div class="item_details">
+                            <span class="item_brand">{{ item.guitarra.marca.marca }}</span>
+                            <h4 class="item_title">{{ item.guitarra.marca.marca }} {{ item.guitarra.modelo }}</h4>
+                            <span class="item_unit_price_mobile">R$ {{ item.preco }}</span>
+                        </div>
+                    </div>
+
+                    <div class="item_unit_price">
+                        <span>R$ {{ item.preco }}</span>
+                    </div>
+
+                    <div class="item_quantity_box">
+                        <div class="quantity_control">
+                            <button type="button" class="qty_btn btn_decrease" data-id="{{ item.id }}" title="Diminuir quantidade">-</button>
+                            <input type="number" class="qty_input" data-id="{{ item.id }}" value="{{ item.quantidade }}" min="1" max="99" readonly>
+                            <button type="button" class="qty_btn btn_increase" data-id="{{ item.id }}" title="Aumentar quantidade">+</button>
+                        </div>
+                    </div>
+
+                    <div class="item_subtotal_box">
+                        <span class="item_subtotal_val" id="subtotal_{{ item.id }}">R$ {{ item.subtotal }}</span>
+                    </div>
+
+                    <div class="item_remove_box">
+                        <a href="{% url 'remover_do_carrinho' item.id %}" class="btn_remove_item" data-id="{{ item.id }}" title="Remover item">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="carrinho_actions_bar">
+                <a href="{% url 'home' %}#vitrine" class="site_btn btn_continue">
+                    <i class="fa-solid fa-arrow-left"></i> Continuar Comprando
+                </a>
+                <a href="{% url 'limpar_carrinho' %}" class="site_btn btn_clear" onclick="return confirm('Tem certeza que deseja esvaziar seu carrinho?');">
+                    <i class="fa-solid fa-broom"></i> Esvaziar Carrinho
+                </a>
+            </div>
+        </div>
+
+        <!-- Resumo do Pedido -->
+        <div class="carrinho_summary_card">
+            <h3 class="summary_title">RESUMO DO PEDIDO</h3>
+            <hr class="summary_underline">
+
+            <div class="summary_row">
+                <span>Total de Itens:</span>
+                <strong id="summary_total_items">{{ cart_total_items }}</strong>
+            </div>
+
+            <div class="summary_row">
+                <span>Subtotal dos Produtos:</span>
+                <span id="summary_subtotal">R$ {{ cart_total_price }}</span>
+            </div>
+
+            <div class="summary_row">
+                <span>Envio / Frete:</span>
+                <span class="free_shipping_badge">GRÁTIS (Brasil)</span>
+            </div>
+
+            <div class="summary_divider"></div>
+
+            <div class="summary_total_row">
+                <span>TOTAL:</span>
+                <span class="summary_total_val" id="summary_total_price">R$ {{ cart_total_price }}</span>
+            </div>
+
+            <div class="summary_installments">
+                <span>ou em até <strong>12x sem juros</strong> no cartão</span>
+            </div>
+
+            <button type="button" class="site_btn btn1 checkout_btn" onclick="window.showToast('Pedido registrado com sucesso! Obrigado pela preferência.', 'success')">
+                <i class="fa-solid fa-lock"></i> FINALIZAR COMPRA
+            </button>
+
+            <div class="summary_guarantees">
+                <div class="guarantee_item">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Compra 100% Criptografada e Segura</span>
+                </div>
+                <div class="guarantee_item">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <span>Regulagem Técnica e Garantia de 1 Ano</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <!-- Estado de Carrinho Vazio -->
+    <div class="carrinho_empty_box">
+        <div class="empty_icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+        <h3>Seu carrinho está vazio</h3>
+        <p>Parece que você ainda não escolheu seu próximo instrumento. Explore nossas novidades e encontre a guitarra ideal para o seu timbre!</p>
+        <a href="{% url 'home' %}#vitrine" class="site_btn btn1 empty_cta_btn">
+            VER VITRINE DE GUITARRAS
+        </a>
+    </div>
+    {% endif %}
+</section>
+{% endblock conteudo_principal %}
+
+{% block extra_js %}
+<script src="{% static 'js/carrinho.js' %}"></script>
+{% endblock extra_js %}

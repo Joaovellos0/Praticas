@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+{% load static %}
+{% load l10n %}
+
+{% block title %}MÙSIC Shop | As Melhores Guitarras do Mundo{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock extra_css %}
+
+{% block header_wrapper %}
+<section class="hero_conteiner">
+    <div class="hero_contents">
+        {% include "includes/header.html" %}
+        
+        <div class="hero_title_conteiner">
+            <span class="hero_subtitle">TIMBRE, PRECISÃO E ARTE</span>
+            <h1>ECOMMERCE DE GUITARRAS</h1>
+            <p>O lugar principal para encontrar sua guitarra dos sonhos com atendimento de guitarrista para guitarrista.</p>
+            <div class="hero_cta_box">
+                <a href="#vitrine" class="site_btn btn1 hero_cta_btn">EXPLORAR VITRINE</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock header_wrapper %}
+
+{% block conteudo_principal %}
+<!-- Faixa de Vantagens / Cards Over (Sobrepõe a parte inferior do Hero com elevação premium) -->
+<section class="cards_over_conteiner">
+    <div class="cards_over_contents">
+        <div class="card_over">
+            <div class="card_over_logo_box">
+                <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <div class="card_over_txt_box">
+                <p>Envio Rápido e Seguro Para Todo o País.</p>
+            </div>
+        </div>
+        <div class="card_over">
+            <div class="card_over_logo_box">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+            <div class="card_over_txt_box">
+                <p>Garantia Com Regulagem Grátis de 1 Ano.</p>
+            </div>
+        </div>
+        <div class="card_over">
+            <div class="card_over_logo_box">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="card_over_txt_box">
+                <p>Compra 100% Segura e Certificada.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção: Novas Adições -->
+<section class="adds_conteiner" id="novidades">
+    <div class="site_section_title_box">
+        <h2>NOVAS ADIÇÕES</h2>
+        <hr class="section_title_underline">
+    </div>
+    
+    <div class="new_products_conteiner">
+        {% for guitarra in guitarras_adicionadas %}
+        <div class="new_product_card">
+            <a href="{% url 'detalhe_guitarra' guitarra.id %}" class="new_product_img_box" aria-label="Ver {{ guitarra.marca.marca }} {{ guitarra.modelo }}">
+                {% if guitarra.ilustracao %}
+                <img src="{{ guitarra.ilustracao.url }}" alt="{{ guitarra.marca.marca }} {{ guitarra.modelo }}" loading="lazy">
+                {% else %}
+                <div class="no_img_box"><i class="fa-solid fa-guitar"></i></div>
+                {% endif %}
+            </a>
+            <div class="new_product_info">
+                <span class="product_brand_tag">{{ guitarra.marca.marca }}</span>
+                <a href="{% url 'detalhe_guitarra' guitarra.id %}">
+                    <h3>{{ guitarra.marca.marca }} {{ guitarra.modelo }}</h3>
+                </a>
+                <div class="new_product_info_price_box">
+                    <p class="product_price">R$ {{ guitarra.preco }}</p>
+                    <div class="card_actions_group">
+                        <a href="{% url 'detalhe_guitarra' guitarra.id %}" class="site_btn btn_view_details">
+                            VER DETALHES
+                        </a>
+                        <a href="{% url 'adicionar_ao_carrinho' guitarra.id %}" 
+                           class="site_btn btn_cart_quick btn_add_to_cart" 
+                           data-guitarra-id="{{ guitarra.id }}" 
+                           data-guitarra-nome="{{ guitarra.marca.marca }} {{ guitarra.modelo }}"
+                           title="Adicionar ao Carrinho"
+                           aria-label="Adicionar {{ guitarra.marca.marca }} {{ guitarra.modelo }} ao carrinho">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="underline_add_box"> 
+        <hr class="add_title_underline">
+    </div>
+</section>
+
+<!-- Seção: Banner de Destaque (Carrossel Rotativo Infinito) -->
+{% if guitarras_banner %}
+<section class="banner_conteiner" id="banner_carousel" data-total="{{ guitarras_banner|length }}" aria-roledescription="carousel" aria-label="Produtos em Destaque">
+    <div class="banner_slides_track">
+        {% for g in guitarras_banner %}
+        <div class="banner_slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.counter0 }}">
+            <div class="banner_contents_box">
+                <div class="banner_title_box">
+                    <span class="banner_tag">GUITARRA EM DESTAQUE</span>
+                    <hr class="banner_underline">
+                </div>
+                <div class="banner_content_box">
+                    <div class="banner_product_title_box">
+                        <a href="{% url 'detalhe_guitarra' g.id %}">
+                            <h2 class="banner_product_title">{{ g.marca.marca }} {{ g.modelo }}</h2>
+                        </a>
+                    </div>
+                    <div class="banner_price_highlight">
+                        <span class="banner_price_label">A partir de</span>
+                        <span class="banner_price_val">R$ {{ g.preco }}</span>
+                    </div>
+                </div>
+                <div class="banner_btn_box">
+                    <a href="{% url 'detalhe_guitarra' g.id %}" 
+                       class="site_btn banner_btn btn_view_details_banner">
+                        VER DETALHES
+                    </a>
+                </div>
+            </div>
+            
+            <div class="banner_img_box" {% if g.banner %}style="background-image: url('{{ g.banner.url }}');"{% elif g.ilustracao %}style="background-image: url('{{ g.ilustracao.url }}');"{% endif %}>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if guitarras_banner|length > 1 %}
+    <!-- Controles do Carrossel de Banner -->
+    <div class="banner_controls">
+        <button type="button" class="banner_arrow banner_arrow_prev" id="banner_prev_btn" aria-label="Banner anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="banner_dots_container" id="banner_dots">
+            {% for g in guitarras_banner %}
+            <button type="button" class="banner_dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}" aria-label="Slide {{ forloop.counter }}"></button>
+            {% endfor %}
+        </div>
+
+        <button type="button" class="banner_arrow banner_arrow_next" id="banner_next_btn" aria-label="Próximo banner">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+    {% endif %}
+</section>
+{% endif %}
+
+<!-- Seção: Vitrine em Carrossel (Estilo Ibanez Dinâmico Sem Limite de Produtos) -->
+<section class="vitrine_conteiner" id="vitrine">
+    <div class="site_section_title_box">
+        <h2>VITRINE</h2>
+        <hr class="section_title_underline">
+    </div>
+
+    <!-- Barra de Filtros por Marcas Dinâmicos -->
+    <div class="vitrine_filter_bar">
+        {% for vm in vitrine_marcas %}
+            {% if vm.total_guitarras > 0 %}
+            <button class="vitrine_filter_btn {% if forloop.first %}active{% endif %}" 
+                    type="button"
+                    data-marca-id="{{ vm.marca.id }}"
+                    data-total-pages="{{ vm.total_paginas }}">
+                {{ vm.marca.marca }}
+            </button>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Vitrine Wrapper com Setas nas Extremidades -->
+    <div class="vitrine_carousel_outer">
+        <button type="button" class="vitrine_edge_arrow vitrine_edge_arrow_prev" id="vitrine_arrow_prev" aria-label="Página anterior da vitrine" title="Página anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <!-- Vitrines por Marca (Divididas em blocos de exatamente 3 guitarras por página, calculadas dinamicamente) -->
+        <div class="vitrine_showcase_wrapper">
+            {% for vm in vitrine_marcas %}
+                {% if vm.total_guitarras > 0 %}
+                <div class="vitrine_brand_block {% if forloop.first %}active{% endif %}" 
+                     id="vitrine_brand_{{ vm.marca.id }}" 
+                     data-marca-id="{{ vm.marca.id }}"
+                     data-total-pages="{{ vm.total_paginas }}">
+                     
+                    {% for pagina in vm.paginas %}
+                    <div class="vitrine_page {% if forloop.first %}active{% endif %}" data-page="{{ forloop.counter }}">
+                        <div class="vitrine_grid">
+                            {% for guitarra in pagina %}
+                            <div class="vitrine_card">
+                                <span class="vitrine_card_tag">{{ guitarra.marca.marca }}</span>
+                                <a href="{% url 'detalhe_guitarra' guitarra.id %}" class="vitrine_card_img_box" aria-label="Ver detalhes de {{ guitarra.marca.marca }} {{ guitarra.modelo }}">
+                                    {% if guitarra.ilustracao %}
+                                    <img src="{{ guitarra.ilustracao.url }}" alt="{{ guitarra.marca.marca }} {{ guitarra.modelo }}" loading="lazy">
+                                    {% else %}
+                                    <div class="no_img_box"><i class="fa-solid fa-guitar"></i></div>
+                                    {% endif %}
+                                </a>
+                                <div class="vitrine_card_info">
+                                    <a href="{% url 'detalhe_guitarra' guitarra.id %}">
+                                        <h3 class="vitrine_card_title">{{ guitarra.marca.marca }} {{ guitarra.modelo }}</h3>
+                                    </a>
+                                    <div class="vitrine_card_price_row">
+                                        <span class="vitrine_card_price">R$ {{ guitarra.preco }}</span>
+                                        <div class="card_actions_group">
+                                            <a href="{% url 'detalhe_guitarra' guitarra.id %}" class="site_btn btn_view_details">
+                                                VER DETALHES
+                                            </a>
+                                            <a href="{% url 'adicionar_ao_carrinho' guitarra.id %}" 
+                                               class="site_btn btn_cart_quick btn_add_to_cart" 
+                                               data-guitarra-id="{{ guitarra.id }}" 
+                                               data-guitarra-nome="{{ guitarra.marca.marca }} {{ guitarra.modelo }}"
+                                               title="Adicionar ao Carrinho"
+                                               aria-label="Adicionar {{ guitarra.marca.marca }} {{ guitarra.modelo }} ao carrinho">
+                                                <i class="fa-solid fa-cart-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <button type="button" class="vitrine_edge_arrow vitrine_edge_arrow_next" id="vitrine_arrow_next" aria-label="Próxima página da vitrine" title="Próxima página">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Controles de Paginação Dinâmica da Vitrine -->
+    <div class="vitrine_pagination_conteiner" id="vitrine_pagination">
+        <!-- Renderizado dinamicamente via JS de acordo com a marca selecionada -->
+    </div>
+</section>
+{% endblock conteudo_principal %}
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock extra_js %}

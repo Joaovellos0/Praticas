@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MÙSIC Shop | E-commerce de Guitarras{% endblock title %}</title>
+    
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    {% block extra_css %}{% endblock extra_css %}
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}" data-login-url="{% url 'login' %}" data-carrinho-url="{% url 'carrinho' %}">
+
+    <!-- Container de Notificações / Toasts -->
+    <div id="toast_container" class="toast_container" aria-live="polite">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="toast_item toast_{{ message.tags|default:'info' }}">
+                    <div class="toast_content">
+                        <i class="fa-solid {% if message.tags == 'success' %}fa-circle-check{% elif message.tags == 'error' %}fa-circle-xmark{% else %}fa-circle-info{% endif %}"></i>
+                        <span>{{ message }}</span>
+                    </div>
+                    <button class="toast_close" type="button" onclick="this.parentElement.remove()">&times;</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Header Wrapper -->
+    {% block header_wrapper %}
+    <div class="header_standard">
+        {% include "includes/header.html" %}
+    </div>
+    {% endblock header_wrapper %}
+
+    <!-- Conteúdo Principal -->
+    <main>
+        {% block conteudo_principal %}{% endblock conteudo_principal %}
+    </main>
+
+    <!-- Seção de Newsletter (acima do Footer) -->
+    <section class="newsletter_section">
+        <div class="newsletter_container">
+            <div class="newsletter_info">
+                <span class="newsletter_badge">FIQUE POR DENTRO</span>
+                <h2>RECEBA NOVIDADES E OFERTAS EXCLUSIVAS</h2>
+                <p>Cadastre-se na nossa newsletter e receba promoções especiais e lançamentos de guitarras em primeira mão.</p>
+            </div>
+            <form class="newsletter_form" onsubmit="event.preventDefault(); window.showToast('Obrigado por se inscrever! Em breve você receberá novidades exclusivas.', 'success'); this.reset();">
+                <div class="newsletter_input_box">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" placeholder="Digite seu melhor e-mail..." required aria-label="E-mail para newsletter">
+                </div>
+                <button type="submit" class="site_btn btn1 newsletter_btn">INSCREVER-SE</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Rodapé Institucional Completo -->
+    <footer class="footer_main">
+        <div class="footer_container">
+            <div class="footer_col footer_brand">
+                <a href="{% url 'home' %}" class="header_logo footer_logo">  
+                    <div class="bg_logo">
+                        <h2>GÙITAR</h2>
+                    </div>
+                    <h3>Shop</h3>
+                </a>
+                <p class="footer_desc">
+                    A loja definitiva para guitarristas exigentes. Instrumentos selecionados das maiores marcas mundiais com envio protegido e regulagem técnica de precisão.
+                </p>
+                <div class="footer_socials">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer_col">
+                <h4 class="footer_title">NAVEGAÇÃO RÁPIDA</h4>
+                <ul class="footer_links">
+                    <li><a href="{% url 'home' %}"><i class="fa-solid fa-chevron-right"></i> Início</a></li>
+                    <li><a href="{% url 'home' %}#vitrine"><i class="fa-solid fa-chevron-right"></i> Vitrine de Guitarras</a></li>
+                    <li><a href="{% url 'carrinho' %}"><i class="fa-solid fa-chevron-right"></i> Carrinho de Compras</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}"><i class="fa-solid fa-chevron-right"></i> Encerrar Sessão</a></li>
+                    {% else %}
+                    <li><a href="{% url 'cadastro' %}"><i class="fa-solid fa-chevron-right"></i> Criar Conta</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="footer_col">
+                <h4 class="footer_title">CONFIANÇA & GARANTIA</h4>
+                <ul class="footer_links">
+                    <li><a href="#"><i class="fa-solid fa-screwdriver-wrench"></i> Garantia e Regulagem de 1 Ano</a></li>
+                    <li><a href="#"><i class="fa-solid fa-truck-fast"></i> Envio com Seguro Total</a></li>
+                    <li><a href="#"><i class="fa-solid fa-shield-halved"></i> Compra 100% Protegida</a></li>
+                    <li><a href="#"><i class="fa-solid fa-headset"></i> Suporte com Especialistas</a></li>
+                </ul>
+            </div>
+
+            <div class="footer_col">
+                <h4 class="footer_title">PAGAMENTO SEGURO</h4>
+                <p class="footer_payment_text">Parcele em até 12x sem juros no cartão ou pague à vista com desconto via Pix ou Boleto.</p>
+                <div class="footer_payment_icons">
+                    <i class="fa-brands fa-cc-visa" title="Visa"></i>
+                    <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+                    <i class="fa-solid fa-qrcode" title="Pix"></i>
+                    <i class="fa-solid fa-barcode" title="Boleto"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer_bottom">
+            <div class="footer_bottom_container">
+                <p>&copy; 2026 MÙSIC Shop. Todos os direitos reservados. E-commerce de Guitarras.</p>
+                <p class="footer_made_with">Desenvolvido com Django</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo (Back to Top) - Canto Inferior Esquerdo -->
+    <button type="button" id="back_to_top_btn" class="back_to_top_btn" aria-label="Voltar ao topo da página" title="Voltar ao topo">
+        <i class="fa-solid fa-arrow-up"></i>
+        <span class="back_to_top_text">TOPO</span>
+    </button>
+
+    <!-- Modal de Login Overlay -->
+    <div class="modal_user_overlay_conteiner" id="user_menu" aria-hidden="true">
+        <div class="modal_user_conteiner" role="dialog" aria-modal="true" aria-labelledby="modal_heading">
+            <button class="modal_close_btn" id="modal_close_btn" type="button" aria-label="Fechar Modal">&times;</button>
+            
+            <div class="modal_img_box">
+                <div class="modal_img_text">
+                    <h3>GÙITAR SHOP</h3>
+                    <p>O palco dos seus maiores acordes começa aqui.</p>
+                </div>
+            </div>
+
+            <div class="modal_contents_box">
+                {% if request.user.is_authenticated %}
+                <div class="modal_logged_box">
+                    <div class="modal_title_box">
+                        <i class="fa-solid fa-circle-user modal_user_avatar"></i>
+                        <h2 id="modal_heading">Olá, {{ request.user.username }}!</h2>
+                        <p>Sua conta está ativa no GÙITAR Shop.</p>
+                    </div>
+                    <div class="modal_logged_actions">
+                        <a href="{% url 'carrinho' %}" class="site_btn btn1 modal_btn_cart">
+                            <i class="fa-solid fa-cart-shopping"></i> Ir para o Carrinho
+                        </a>
+                        <a href="{% url 'logout' %}" class="site_btn modal_btn_logout">
+                            <i class="fa-solid fa-right-from-bracket"></i> Sair da Conta
+                        </a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="modal_title_box">
+                    <h2 id="modal_heading">ACESSE SUA CONTA</h2>
+                    <p>Entre com seus dados para continuar</p>
+                </div>
+
+                <div class="modal_form_box">
+                    <form action="{% url 'login' %}" method="POST" id="modal_login_form">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <div class="form_group">
+                            <label for="modal_user_nome">Nome de Usuário</label>
+                            <div class="input_field_box">
+                                <i class="fa-solid fa-user"></i>
+                                <input type="text" id="modal_user_nome" name="nome" placeholder="Seu usuário cadastrado" required autocomplete="username">
+                            </div>
+                        </div>
+
+                        <div class="form_group">
+                            <label for="modal_user_senha">Senha</label>
+                            <div class="input_field_box">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="modal_user_senha" name="senha" placeholder="Sua senha secreta" required autocomplete="current-password">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="site_btn btn1 modal_login_submit">ENTRAR</button>
+                    </form>
+                </div>
+
+                <div class="or_box">
+                    <span>OU</span>
+                </div>
+
+                <div class="modal_register_box">
+                    <p>Ainda não tem cadastro?</p>
+                    <a href="{% url 'cadastro' %}" class="site_btn modal_register_link">REGISTRE-SE</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Global -->
+    <script src="{% static 'js/global.js' %}"></script>
+    {% block extra_js %}{% endblock extra_js %}
+</body>
+</html>

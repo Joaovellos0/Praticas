@@ -1,0 +1,63 @@
+.conteiner {
+    margin: 100px auto;
+    width: 90%;
+    border: 5px solid red;
+    display: flex;
+    overflow-x: auto;
+}
+
+.conteiner::-webkit-scrollbar {
+    display: none;
+}
+
+.carrossel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    animation: spin 10s infinite linear;
+    padding-right: 1em;
+}
+
+.card {
+    flex: 0 0 5em;
+    height: 5em;
+    padding: 1em;
+    background: blueviolet;
+    font-size: 3em;
+    border-radius: .2em;
+    text-align: center;
+    align-content: center;
+}
+
+.conteiner_logos {
+    width: 90%;
+    display: flex;
+    margin: 100px auto;
+    border: 5px solid black;
+    overflow-x: auto;
+}
+
+.carrosel_logos {
+   display: flex;
+   align-items: center;
+}
+
+.items {
+    display: flex;
+    flex: 0 0 5em;
+    height: 5em;
+    width: 20%;
+    text-align: center;
+    align-content: center;
+    margin: 0;
+}
+
+.logo{
+    height: 100%;
+}
+
+@keyframes spin {
+    from {translate: 0;}
+    to{translate: -100%;}
+}
